@@ -25,6 +25,11 @@
 
                 <!-- User Information -->
                 <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $user->name) }}" required>
+                </div>
+
+                <div class="form-group">
                     <label for="studentemail">Student Email:</label>
                     <input type="text" name="studentemail" id="studentemail" class="form-control" value="{{ $user->studentemail }}" readonly>
                 </div>

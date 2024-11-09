@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CollegeController;
+use App\Http\Controllers\RoommateController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,4 +34,5 @@ Route::get('/users/{user}', [CollegeController::class, 'showStudent'])->name('us
 Route::get('/student_image/{filename}', [ProfileController::class, 'getStudentImage'])->name('student.image');
 
 
+Route::get('/recommend-roommates', [RoommateController::class, 'recommendRoommates'])->name('recommend.roommates');
 
