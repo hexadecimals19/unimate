@@ -38,7 +38,7 @@
                                 <div class="col-md-4 mb-4">
                                     <a href="{{ route('colleges.show', $college->id) }}" class="text-decoration-none text-dark">
                                         <div class="card h-100">
-                                            <img src="{{ asset($college->collegeimage) }}" alt="{{ $college->collegename }}" class="card-img-top">
+                                            <img src="{{ asset($college->collegeimage) }}" alt="{{ $college->collegename }}" class="card-img-top" style="width: px; height: 110px; object-fit: cover;">
                                             <div class="card-body text-center">
                                                 <h5 class="card-title">{{ $college->collegename }}</h5>
                                                 <p class="card-text">{{ $college->collegedesc }}</p>

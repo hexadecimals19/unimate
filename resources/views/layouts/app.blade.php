@@ -15,12 +15,43 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(to bottom, white, #4DB1E2);
+            min-height: 100%;
+        }
+
+        #app {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+            width: 100%;
+        }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
+        <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: white;">
             <div class="container">
-                <a class="navbar-brand fw-bold" href="{{ url('/') }}" style="font-size: 1.5rem; color: #00796b;">
+                <a class="navbar-brand fw-bold" href="{{ url('/') }}" style="font-size: 1.5rem; color: #211d70;">
                     <div class="flex items-center">
                         <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="mr-3" style="max-width: 50px;">
                     </div>
@@ -32,7 +63,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <!-- You can add links here if needed -->
+                        <li class="nav-item">
+                            <a class="nav-link fw-bold" href="{{ url('/') }}" style="color: #211d70;">Unimate</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -60,17 +93,34 @@
                                     <a class="dropdown-item" href="{{ route('profile.show') }}">
                                         View My Profile
                                     </a>
+
+                                    <!-- View My Roommate Applications (Applications Sent by User) -->
+                                    <a class="dropdown-item" href="{{ route('roommate.history') }}">
+                                        View My Roommate Applications
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{ route('roommate.confirmed') }}">
+                                        View Confirmed Roommates
+                                    </a>
+
+                                    <!-- View Received Roommate Applications -->
+                                    <a class="dropdown-item" href="{{ route('roommate.received') }}">
+                                        View Received Roommate Applications
+                                    </a>
+
                                     <!-- Logout Button -->
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                 document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+
                                     <!-- Logout Form -->
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
+
                             </li>
                         @endguest
                     </ul>
@@ -78,9 +128,58 @@
             </div>
         </nav>
 
+        <!-- Main Content -->
         <main class="py-4">
             @yield('content')
         </main>
+
+        <!-- Footer -->
+        <footer class="footer mt-auto py-4">
+            <div class="container d-flex flex-wrap justify-content-start align-items-start">
+                <!-- Resources Section -->
+                <div class="d-flex flex-column me-5">
+                    <div class="fw-bold mb-2">Resources</div>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">UiTM Library</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Online Learning Portal</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Student Portal</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Official UiTM Website</a></li>
+                    </ul>
+                </div>
+
+                <!-- Help Section -->
+                <div class="d-flex flex-column me-5">
+                    <div class="fw-bold mb-2">Help</div>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">Contact Us</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Get Help</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Order Status</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Delivery</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Payment Options</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Section -->
+                <div class="d-flex flex-column me-5">
+                    <div class="fw-bold mb-2">Company</div>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none">About UiTM</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">News</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Careers</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Investors</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none">Sustainability</a></li>
+                    </ul>
+                </div>
+
+                <!-- Branding and Copyright -->
+                <div class="ms-auto text-end">
+                    <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" style="max-width: 100px;">
+                    <div class="text-muted mt-3">&copy; 2024 UiTM. All rights reserved.<br>
+                        For more information, visit the <a href="#" class="text-muted text-decoration-none">Official UiTM Website</a>.
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

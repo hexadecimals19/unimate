@@ -36,3 +36,30 @@ Route::get('/student_image/{filename}', [ProfileController::class, 'getStudentIm
 
 Route::get('/recommend-roommates', [RoommateController::class, 'recommendRoommates'])->name('recommend.roommates');
 
+// routes/web.php
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/roommate/request/{roommateId}', [RoommateController::class, 'applyToBeRoommate'])->name('roommate.apply');
+    Route::get('/roommate/applications', [RoommateController::class, 'viewApplicationHistory'])->name('roommate.history');
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/roommate/applications/received', [RoommateController::class, 'viewReceivedApplications'])->name('roommate.received');
+    Route::post('/roommate/application/{applicationId}/accept', [RoommateController::class, 'acceptApplication'])->name('roommate.accept');
+    Route::delete('/roommate/application/{applicationId}/reject', [RoommateController::class, 'rejectApplication'])->name('roommate.reject');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/roommate/applications/received', [RoommateController::class, 'viewReceivedApplications'])->name('roommate.received');
+    Route::post('/roommate/application/{applicationId}/accept', [RoommateController::class, 'acceptApplication'])->name('roommate.accept');
+    Route::delete('/roommate/application/{applicationId}/reject', [RoommateController::class, 'rejectApplication'])->name('roommate.reject');
+    Route::get('/roommate/confirmed', [RoommateController::class, 'viewConfirmedRoommates'])->name('roommate.confirmed');
+});
+
+
+Route::delete('/roommate/remove/{applicationId}', [RoommateController::class, 'removeConfirmedRoommate'])->name('roommate.remove');
+
+Route::post('/roommate/request/{roommateId}', [RoommateController::class, 'applyToBeRoommate'])->name('roommate.apply');
+
+

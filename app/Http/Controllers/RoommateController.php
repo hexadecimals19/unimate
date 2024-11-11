@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\RoommateApplication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoommateController extends Controller
 {
@@ -125,5 +127,108 @@ class RoommateController extends Controller
         }
 
         return [$score, $details];
+    }
+
+    public function applyToBeRoommate($roommateId)
+    {
+        $userId = Auth::id();
+
+        // Prevent user from applying to themselves
+        if ($userId == $roommateId) {
+            return redirect()->back()->with('error', 'You cannot apply to be your own roommate.');
+        }
+
+        // Check if an application already exists
+        $existingApplication = RoommateApplication::where('applicant_id', $userId)
+            ->where('roommate_id', $roommateId)
+            ->first();
+
+        if ($existingApplication) {
+            return redirect()->back()->with('error', 'You have already applied to be this person\'s roommate.');
+        }
+
+        // Create a new application
+        RoommateApplication::create([
+            'applicant_id' => $userId,
+            'roommate_id' => $roommateId,
+            'status' => 'pending'
+        ]);
+
+        return redirect()->back()->with('success', 'Roommate request sent successfully.');
+    }
+
+    public function viewApplicationHistory()
+    {
+        $userId = Auth::id();
+        $applications = RoommateApplication::where('applicant_id', $userId)
+            ->with('roommate')
+            ->get();
+
+        return view('roommates.application_history', compact('applications'));
+    }
+
+    public function viewReceivedApplications()
+    {
+        $user = Auth::user();
+
+        // Only show pending applications
+        $applications = RoommateApplication::where('roommate_id', $user->id)
+            ->where('status', 'pending')
+            ->with('applicant')
+            ->get();
+
+        return view('roommates.received_applications', compact('applications'));
+    }
+
+    public function acceptApplication($applicationId)
+    {
+        $application = RoommateApplication::findOrFail($applicationId);
+
+        if ($application->roommate_id !== Auth::id()) {
+            return redirect()->route('roommate.received')->with('error', 'You are not authorized to accept this request.');
+        }
+
+        $application->update(['status' => 'accepted']);
+
+        return redirect()->route('roommate.received')->with('success', 'Roommate request accepted successfully.');
+    }
+
+    public function rejectApplication($applicationId)
+    {
+        $application = RoommateApplication::findOrFail($applicationId);
+
+        if ($application->roommate_id !== Auth::id()) {
+            return redirect()->route('roommate.received')->with('error', 'You are not authorized to reject this request.');
+        }
+
+        $application->update(['status' => 'rejected']);
+
+        return redirect()->route('roommate.received')->with('success', 'Roommate request rejected successfully.');
+    }
+
+    public function viewConfirmedRoommates()
+    {
+        $user = Auth::user();
+
+        // Get all confirmed roommates (status = accepted)
+        $confirmedRoommates = RoommateApplication::where(function ($query) use ($user) {
+            $query->where('roommate_id', $user->id)
+                  ->orWhere('applicant_id', $user->id);
+        })->where('status', 'accepted')->with(['applicant', 'roommate'])->get();
+
+        return view('roommates.confirmed_roommates', compact('confirmedRoommates'));
+    }
+
+    public function removeConfirmedRoommate($applicationId)
+    {
+        $application = RoommateApplication::findOrFail($applicationId);
+
+        if (Auth::id() !== $application->applicant_id && Auth::id() !== $application->roommate_id) {
+            return redirect()->route('roommate.confirmed')->with('error', 'You are not authorized to remove this roommate.');
+        }
+
+        $application->delete();
+
+        return redirect()->route('roommate.confirmed')->with('success', 'Roommate removed successfully.');
     }
 }
