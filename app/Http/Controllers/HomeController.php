@@ -29,6 +29,11 @@ class HomeController extends Controller
         // Get the authenticated user
         $user = Auth::user();
 
+        // Check if the user's email is verified
+        if (is_null($user->email_verified_at)) {
+            return redirect('/email/verify')->with('message', 'You need to verify your email before accessing the dashboard.');
+        }
+
         // Get the search query from the request
         $search = $request->input('search');
 

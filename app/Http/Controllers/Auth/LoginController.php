@@ -50,5 +50,18 @@ class LoginController extends Controller
         return 'studentemail';  // Use 'studentemail' instead of 'email'
     }
 
+    protected function credentials(Request $request)
+{
+    return [
+        'studentemail' => $request->get('studentemail'),
+        'password' => $request->get('password'),
+    ];
+}
 
 }
+
+
+
+
+
+

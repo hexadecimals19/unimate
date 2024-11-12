@@ -79,4 +79,10 @@ Route::get('/profile/verify-delete', [ProfileController::class, 'verifyDeleteFor
 Route::post('/profile/verify-delete', [ProfileController::class, 'verifyDelete'])->name('profile.verifyDelete');
 
 
+use App\Http\Controllers\Auth\VerificationController;
+
+
+Route::get('/email/verify', [VerificationController::class, 'showVerificationForm'])->name('verification.notice');
+Route::post('/email/verify', [VerificationController::class, 'verify'])->name('verification.verify');
+
 

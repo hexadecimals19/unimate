@@ -142,7 +142,7 @@ class ProfileController extends Controller
         // Send the verification code to the user's email
         Mail::send('emails.delete_verification', ['code' => $verificationCode], function ($message) use ($user) {
             $message->to($user->studentemail);
-            $message->subject('UniMate Mailing System: Account Deletion Verification Code');
+            $message->subject('UniMate Deletion System: Account Deletion Verification Code');
         });
 
         // Redirect to the verification form

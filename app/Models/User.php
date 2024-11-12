@@ -26,6 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'studentid',
         'studentgender',
         'studentimage', // Student image field
+        'verification_code', // Add verification_code to fillable
     ];
 
     /**

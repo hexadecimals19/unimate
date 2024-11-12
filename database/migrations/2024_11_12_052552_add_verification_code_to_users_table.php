@@ -10,17 +10,19 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up()
-{
-    Schema::table('users', function (Blueprint $table) {
-        $table->string('verification_code')->nullable();
-    });
-}
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('verification_code', 6)->nullable();
+        });
+    }
 
-public function down()
-{
-    Schema::table('users', function (Blueprint $table) {
-        $table->dropColumn('verification_code');
-    });
-}
-
+    /**
+     * Reverse the migrations.
+     */
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('verification_code');
+        });
+    }
 };
