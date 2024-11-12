@@ -50,5 +50,5 @@ class LoginController extends Controller
         return 'studentemail';  // Use 'studentemail' instead of 'email'
     }
 
-    
+
 }

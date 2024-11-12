@@ -64,3 +64,19 @@ Route::post('/roommate/request/{roommateId}', [RoommateController::class, 'apply
 
 
 Route::delete('/applications/{id}', [RoommateController::class, 'destroy'])->name('applications.destroy');
+
+
+Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+// Request to delete account
+Route::get('/profile/request-delete', [ProfileController::class, 'requestDelete'])->name('profile.requestDelete');
+
+// Show the form to verify deletion code
+Route::get('/profile/verify-delete', [ProfileController::class, 'verifyDeleteForm'])->name('profile.verifyDeleteForm');
+
+// Handle the verification code submission and delete account
+Route::post('/profile/verify-delete', [ProfileController::class, 'verifyDelete'])->name('profile.verifyDelete');
+
+
+

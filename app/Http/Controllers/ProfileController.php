@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use App\Models\College;
 use App\Models\Profile;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
@@ -28,80 +30,88 @@ class ProfileController extends Controller
 
     // Update the user's profile
     public function update(Request $request)
-{
-    // Validate the request data
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'studentemail' => 'required|email',
-        'studentid' => 'required',
-        'studentgender' => 'required',
-        'studentcollege' => 'required',
-        'studentimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'bio' => 'nullable|string',
-        'nationality' => 'nullable|string',
-        'home' => 'nullable|string',
-        'age' => 'nullable|integer',
-        'interest1' => 'nullable|string',
-        'interest2' => 'nullable|string',
-        'interest3' => 'nullable|string',
-        'lifestyle1' => 'nullable|string',
-        'lifestyle2' => 'nullable|string',
-        'lifestyle3' => 'nullable|string',
-        'pref1' => 'nullable|string',
-        'pref2' => 'nullable|string',
-        'pref3' => 'nullable|string',
-        'pref4' => 'nullable|string',
-        'pref5' => 'nullable|string',
-    ]);
+    {
+        // Validate the request data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'studentemail' => 'required|email',
+            'studentid' => 'required',
+            'studentgender' => 'required',
+            'studentcollege' => 'required',
+            'studentimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'bio' => 'nullable|string',
+            'nationality' => 'nullable|string',
+            'home' => 'nullable|string',
+            'age' => 'nullable|integer',
+            'interest1' => 'nullable|string',
+            'interest2' => 'nullable|string',
+            'interest3' => 'nullable|string',
+            'lifestyle1' => 'nullable|string',
+            'lifestyle2' => 'nullable|string',
+            'lifestyle3' => 'nullable|string',
+            'pref1' => 'nullable|string',
+            'pref2' => 'nullable|string',
+            'pref3' => 'nullable|string',
+            'pref4' => 'nullable|string',
+            'pref5' => 'nullable|string',
+        ]);
 
-    // Get the authenticated user
-    $user = Auth::user();
+        // Get the authenticated user
+        $user = Auth::user();
 
-    // Handle file upload
-    if ($request->hasFile('studentimage')) {
-        // Delete the old image if it exists
-        if ($user->studentimage) {
-            Storage::delete($user->studentimage);
+        // Handle file upload
+        if ($request->hasFile('studentimage')) {
+            // Delete the old image if it exists
+            if ($user->studentimage) {
+                $oldImagePath = storage_path('app/private/public/student_images/' . basename($user->studentimage));
+                if (File::exists($oldImagePath)) {
+                    File::delete($oldImagePath);
+                }
+            }
+
+            // Store the new image in the specific directory
+            $image = $request->file('studentimage');
+            $destinationPath = storage_path('app/private/public/student_images');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move($destinationPath, $imageName);
+
+            // Update the user's studentimage path
+            $user->studentimage = 'private/public/student_images/' . $imageName;
         }
 
-        // Store the new image
-        $path = $request->file('studentimage')->store('public/student_images');
-        $user->studentimage = $path;
+        // Update user details
+        $user->name = $request->name;  // Update user's name
+        $user->studentemail = $request->studentemail;
+        $user->studentid = $request->studentid;
+        $user->studentgender = $request->studentgender;
+        $user->studentcollege = $request->studentcollege;
+        $user->save(); // Save the changes
+
+        // Update or create the profile details for the user
+        $user->profile()->updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'bio' => $request->bio,
+                'nationality' => $request->nationality,
+                'home' => $request->home,
+                'age' => $request->age,
+                'interest1' => $request->interest1,
+                'interest2' => $request->interest2,
+                'interest3' => $request->interest3,
+                'lifestyle1' => $request->lifestyle1,
+                'lifestyle2' => $request->lifestyle2,
+                'lifestyle3' => $request->lifestyle3,
+                'pref1' => $request->pref1,
+                'pref2' => $request->pref2,
+                'pref3' => $request->pref3,
+                'pref4' => $request->pref4,
+                'pref5' => $request->pref5,
+            ]
+        );
+
+        // Redirect to the profile page with a success message
+        return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
     }
-
-    // Update user details
-    $user->name = $request->name;  // Update user's name
-    $user->studentemail = $request->studentemail;
-    $user->studentid = $request->studentid;
-    $user->studentgender = $request->studentgender;
-    $user->studentcollege = $request->studentcollege;
-    $user->save(); // Save the changes
-
-    // Update or create the profile details for the user
-    $user->profile()->updateOrCreate(
-        ['user_id' => $user->id],
-        [
-            'bio' => $request->bio,
-            'nationality' => $request->nationality,
-            'home' => $request->home,
-            'age' => $request->age,
-            'interest1' => $request->interest1,
-            'interest2' => $request->interest2,
-            'interest3' => $request->interest3,
-            'lifestyle1' => $request->lifestyle1,
-            'lifestyle2' => $request->lifestyle2,
-            'lifestyle3' => $request->lifestyle3,
-            'pref1' => $request->pref1,
-            'pref2' => $request->pref2,
-            'pref3' => $request->pref3,
-            'pref4' => $request->pref4,
-            'pref5' => $request->pref5,
-        ]
-    );
-
-    // Redirect to the profile page with a success message
-    return redirect()->route('profile.show')->with('success', 'Profile updated successfully');
-}
 
     // Method to get the student image by filename
     public function getStudentImage($filename)
@@ -116,5 +126,66 @@ class ProfileController extends Controller
         $type = File::mimeType($path);
 
         return response($file, 200)->header('Content-Type', $type);
+    }
+
+    // Request to delete account: Generate and send verification code
+    public function requestDelete()
+    {
+        $user = Auth::user(); // Get the authenticated user
+
+        // Generate a random 6-digit verification code
+        $verificationCode = random_int(100000, 999999);
+
+        // Store the code in the session temporarily
+        Session::put('delete_verification_code', $verificationCode);
+
+        // Send the verification code to the user's email
+        Mail::send('emails.delete_verification', ['code' => $verificationCode], function ($message) use ($user) {
+            $message->to($user->studentemail);
+            $message->subject('UniMate Mailing System: Account Deletion Verification Code');
+        });
+
+        // Redirect to the verification form
+        return redirect()->route('profile.verifyDeleteForm')->with('success', 'A verification code has been sent to your email. Please enter the code to proceed with account deletion.');
+    }
+
+    // Show the form to verify the deletion code
+    public function verifyDeleteForm()
+    {
+        return view('profile.verify_delete');
+    }
+
+    // Handle the verification and delete the account
+    public function verifyDelete(Request $request)
+    {
+        $request->validate([
+            'verification_code' => 'required|integer',
+        ]);
+
+        $user = Auth::user();
+        $storedCode = Session::get('delete_verification_code');
+
+        if ($storedCode && $storedCode == $request->verification_code) {
+            // Delete the user's image if it exists
+            if ($user->studentimage) {
+                $oldImagePath = storage_path('app/private/public/student_images/' . basename($user->studentimage));
+                if (File::exists($oldImagePath)) {
+                    File::delete($oldImagePath);
+                }
+            }
+
+            // Delete the user's profile if exists
+            if ($user->profile) {
+                $user->profile->delete();
+            }
+
+            // Delete the user account
+            $user->delete();
+
+            // Redirect to the homepage with a success message
+            return redirect('/')->with('success', 'Your account has been deleted successfully.');
+        } else {
+            return back()->withErrors(['verification_code' => 'The verification code is incorrect.']);
+        }
     }
 }

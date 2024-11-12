@@ -234,6 +234,12 @@
                 <br>
                 <button type="submit" class="btn btn-primary btn-lg">Update Profile</button>
             </form>
+
+             <!-- Delete account form -->
+             <form action="{{ route('profile.requestDelete') }}" method="GET" class="mt-4">
+                <button type="submit" class="btn btn-danger btn-lg">Request Account Deletion</button>
+            </form>
+
         </div>
     </div>
 </div>
