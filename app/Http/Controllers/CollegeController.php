@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\College; // Make sure this path matches where your model is located
+use App\Models\College;
 
 class CollegeController extends Controller
 {
@@ -23,8 +24,13 @@ class CollegeController extends Controller
         // Find the college by ID
         $college = College::findOrFail($collegeId);
 
+        // Get the ID of the logged-in user
+        $loggedInUserId = auth()->id();
+
         // Start with the base query for students associated with the college
-        $studentsQuery = User::where('studentcollege', $college->collegename);
+        // and exclude the logged-in user
+        $studentsQuery = User::where('studentcollege', $college->collegename)
+            ->where('id', '!=', $loggedInUserId);
 
         // Apply the 'name' filter if it exists in the request
         if ($request->filled('name')) {
