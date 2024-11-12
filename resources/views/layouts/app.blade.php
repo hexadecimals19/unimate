@@ -13,6 +13,9 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
@@ -86,33 +89,35 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color: #00796b;">
+                                    <i class="fas fa-user-circle"></i> <!-- User Icon -->
                                     {{ Auth::user()->name }}
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <!-- View Profile Button -->
                                     <a class="dropdown-item" href="{{ route('profile.show') }}">
-                                        View My Profile
+                                        <i class="fas fa-user"></i> View My Profile
                                     </a>
 
-                                    <!-- View My Roommate Applications (Applications Sent by User) -->
+                                    <!-- View My Roommate Applications -->
                                     <a class="dropdown-item" href="{{ route('roommate.history') }}">
-                                        View My Roommate Applications
+                                        <i class="fas fa-paper-plane"></i> View My Roommate Applications
                                     </a>
 
+                                    <!-- View Confirmed Roommates -->
                                     <a class="dropdown-item" href="{{ route('roommate.confirmed') }}">
-                                        View Confirmed Roommates
+                                        <i class="fas fa-user-friends"></i> View Confirmed Roommates
                                     </a>
 
                                     <!-- View Received Roommate Applications -->
                                     <a class="dropdown-item" href="{{ route('roommate.received') }}">
-                                        View Received Roommate Applications
+                                        <i class="fas fa-inbox"></i> View Received Roommate Applications
                                     </a>
 
                                     <!-- Logout Button -->
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
                                     </a>
 
                                     <!-- Logout Form -->
@@ -120,7 +125,6 @@
                                         @csrf
                                     </form>
                                 </div>
-
                             </li>
                         @endguest
                     </ul>

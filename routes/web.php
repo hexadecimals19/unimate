@@ -63,3 +63,4 @@ Route::delete('/roommate/remove/{applicationId}', [RoommateController::class, 'r
 Route::post('/roommate/request/{roommateId}', [RoommateController::class, 'applyToBeRoommate'])->name('roommate.apply');
 
 
+Route::delete('/applications/{id}', [RoommateController::class, 'destroy'])->name('applications.destroy');
