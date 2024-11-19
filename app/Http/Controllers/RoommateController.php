@@ -227,4 +227,16 @@ class RoommateController extends Controller
 
         return redirect()->route('roommate.history')->with('success', 'Rejected application removed successfully.');
     }
+
+    public function confirmed()
+    {
+        // Fetch confirmed roommates for the authenticated user
+        $confirmedRoommates = RoommateApplication::where(function ($query) {
+            $query->where('applicant_id', Auth::id())
+                  ->orWhere('roommate_id', Auth::id());
+        })->get();
+
+        // Return the view with confirmed roommates
+        return view('roommates.confirmed_roommates', compact('confirmedRoommates'));
+    }
 }

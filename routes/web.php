@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\RoommateController;
+use App\Http\Controllers\ReviewController;
 
 
 Route::get('/', function () {
@@ -84,5 +85,21 @@ use App\Http\Controllers\Auth\VerificationController;
 
 Route::get('/email/verify', [VerificationController::class, 'showVerificationForm'])->name('verification.notice');
 Route::post('/email/verify', [VerificationController::class, 'verify'])->name('verification.verify');
+
+
+
+
+// Route to show the review form
+Route::get('/reviews/create/{roommate}', [ReviewController::class, 'create'])->name('reviews.create');
+
+// Route to store the review
+Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews.store');
+
+Route::get('/roommates/confirmed_roommates', [RoommateController::class, 'confirmed'])->name('roommates.confirmed_roommates');
+
+
+
+
+
 
 
