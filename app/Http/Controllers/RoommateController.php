@@ -37,47 +37,61 @@ class RoommateController extends Controller
     }
 
     private function calculateMatchingScore($user, $potentialRoommate)
-    {
-        $score = 0;
-        $details = [
-            'age_points' => 0,
-            'nationality_points' => 0,
-            'interests_points' => 0,
-            'lifestyles_points' => 0,
-            'preferences_points' => 0,
-            'common_interests' => 0,
-            'common_lifestyles' => 0,
-            'common_preferences' => 0,
-            'age' => false,
-            'nationality' => false,
-            'interests' => false,
-            'lifestyles' => false,
-            'preferences' => false
-        ];
+{
+    $score = 0;
+    $details = [
+        'age_points' => 0,
+        'nationality_points' => 0,
+        'state_points' => 0,
+        'district_points' => 0,
+        'interests_points' => 0,
+        'lifestyles_points' => 0,
+        'preferences_points' => 0,
+        'common_interests' => 0,
+        'common_lifestyles' => 0,
+        'common_preferences' => 0,
+        'age' => false,
+        'nationality' => false,
+        'state' => false,
+        'district' => false,
+        'interests' => false,
+        'lifestyles' => false,
+        'preferences' => false
+    ];
 
-        if (!$user->profile || !$potentialRoommate->profile) {
-            return [$score, $details];
-        }
+    if (!$user->profile || !$potentialRoommate->profile) {
+        return [$score, $details];
+    }
 
-        if (!is_null($user->profile->age) && !is_null($potentialRoommate->profile->age)) {
-            $ageDifference = abs($user->profile->age - $potentialRoommate->profile->age);
-            if ($ageDifference <= 2) {
-                $score += 10;
-                $details['age_points'] = 10;
-                $details['age'] = true;
-            } elseif ($ageDifference <= 5) {
-                $score += 5;
-                $details['age_points'] = 5;
-                $details['age'] = true;
-            }
-        }
-
-        if (!is_null($user->profile->nationality) && $user->profile->nationality == $potentialRoommate->profile->nationality) {
+    // Age Matching
+    if (!is_null($user->profile->age) && !is_null($potentialRoommate->profile->age)) {
+        $ageDifference = abs($user->profile->age - $potentialRoommate->profile->age);
+        if ($ageDifference <= 2) {
             $score += 10;
-            $details['nationality_points'] = 10;
-            $details['nationality'] = true;
+            $details['age_points'] = 10;
+            $details['age'] = true;
+        } elseif ($ageDifference <= 5) {
+            $score += 5;
+            $details['age_points'] = 5;
+            $details['age'] = true;
         }
+    }
 
+ // State (nationality) matching
+ if (!is_null($user->profile->nationality) && $user->profile->nationality == $potentialRoommate->profile->nationality) {
+    $score += 10;
+    $details['nationality_points'] = 10;
+    $details['nationality'] = true;
+}
+
+// District or Town matching
+if (!is_null($user->profile->home) && $user->profile->home == $potentialRoommate->profile->home) {
+    $score += 5;
+    $details['district_points'] = 5;
+    $details['district'] = true;
+}
+
+        // Interests Matching
         $interestsUser = array_filter([$user->profile->interest1, $user->profile->interest2, $user->profile->interest3]);
         $interestsRoommate = array_filter([$potentialRoommate->profile->interest1, $potentialRoommate->profile->interest2, $potentialRoommate->profile->interest3]);
         $commonInterests = array_intersect($interestsUser, $interestsRoommate);
@@ -89,6 +103,7 @@ class RoommateController extends Controller
             $details['interests'] = true;
         }
 
+        // Lifestyles Matching
         $lifestylesUser = array_filter([$user->profile->lifestyle1, $user->profile->lifestyle2, $user->profile->lifestyle3]);
         $lifestylesRoommate = array_filter([$potentialRoommate->profile->lifestyle1, $potentialRoommate->profile->lifestyle2, $potentialRoommate->profile->lifestyle3]);
         $commonLifestyles = array_intersect($lifestylesUser, $lifestylesRoommate);
@@ -100,6 +115,7 @@ class RoommateController extends Controller
             $details['lifestyles'] = true;
         }
 
+        // Preferences Matching
         $preferencesUser = array_filter([$user->profile->pref1, $user->profile->pref2, $user->profile->pref3, $user->profile->pref4, $user->profile->pref5]);
         $preferencesRoommate = array_filter([$potentialRoommate->profile->pref1, $potentialRoommate->profile->pref2, $potentialRoommate->profile->pref3, $potentialRoommate->profile->pref4, $potentialRoommate->profile->pref5]);
         $commonPreferences = array_intersect($preferencesUser, $preferencesRoommate);
@@ -113,6 +129,7 @@ class RoommateController extends Controller
 
         return [$score, $details];
     }
+
 
     public function applyToBeRoommate($roommateId)
     {

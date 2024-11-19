@@ -24,7 +24,8 @@
                                 <h5 class="card-title">{{ $roommate->name }}</h5>
                                 <p class="card-text">
                                     <strong>Age:</strong> {{ $roommate->profile->age ?? 'N/A' }}<br>
-                                    <strong>Nationality:</strong> {{ $roommate->profile->nationality ?? 'N/A' }}<br>
+                                    <strong>State:</strong> {{ $roommate->profile->nationality ?? 'N/A' }}<br>
+                                    <strong>District:</strong> {{ $roommate->profile->home ?? 'N/A' }}<br>
                                     <strong>Home:</strong> {{ $roommate->profile->home ?? 'N/A' }}<br>
                                     <strong>Bio:</strong> {{ $roommate->profile->bio ?? 'N/A' }}
                                 </p>

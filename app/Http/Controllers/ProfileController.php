@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use App\Models\College;
+use App\Models\State;
 use App\Models\Profile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
@@ -29,8 +30,11 @@ class ProfileController extends Controller
     {
         $user = Auth::user(); // Get the authenticated user
         $colleges = College::all(); // Get all colleges
-        return view('profile.edit', compact('user', 'colleges')); // Return the 'profile.edit' view with user and colleges data
+        $states = State::all(); // Get all states for dropdown
+
+        return view('profile.edit', compact('user', 'colleges', 'states')); // Pass user, colleges, and states data to view
     }
+
 
     // Update the user's profile
     public function update(Request $request)
@@ -47,6 +51,7 @@ class ProfileController extends Controller
             'nationality' => 'nullable|string',
             'home' => 'nullable|string',
             'age' => 'nullable|integer',
+            'date_of_birth' => 'nullable|date',
             'interest1' => 'nullable|string',
             'interest2' => 'nullable|string',
             'interest3' => 'nullable|string',
@@ -99,6 +104,7 @@ class ProfileController extends Controller
                 'nationality' => $request->nationality,
                 'home' => $request->home,
                 'age' => $request->age,
+                'date_of_birth' => $request->date_of_birth,
                 'interest1' => $request->interest1,
                 'interest2' => $request->interest2,
                 'interest3' => $request->interest3,

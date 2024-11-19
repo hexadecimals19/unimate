@@ -28,7 +28,10 @@
                                         <li>Age: Similar ({{ $roommate['details']['age_points'] }} points)</li>
                                     @endif
                                     @if ($roommate['details']['nationality'])
-                                        <li>Nationality: Match ({{ $roommate['details']['nationality_points'] }} points)</li>
+                                        <li>State: Match ({{ $roommate['details']['nationality_points'] }} points)</li>
+                                    @endif
+                                    @if ($roommate['details']['district'])
+                                    <li>District or Town: Match ({{ $roommate['details']['district_points'] }} points)</li>
                                     @endif
                                     @if ($roommate['details']['interests'])
                                         <li>Interests: {{ $roommate['details']['common_interests'] }} common interests ({{ $roommate['details']['interests_points'] }} points)</li>

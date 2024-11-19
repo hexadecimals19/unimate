@@ -36,7 +36,8 @@
                     <div class="col-md-6">
                         <h4>Profile Details</h4>
                         <p><strong>Bio:</strong> {{ $student->profile->bio ?? 'No data available' }}</p>
-                        <p><strong>Nationality:</strong> {{ $student->profile->nationality ?? 'No data available' }}</p>
+                        <p><strong>State:</strong> {{ $student->profile->nationality ?? 'No data available' }}</p>
+                        <p><strong>District or Town:</strong> {{ $student->profile->home ?? 'No data available' }}</p>
                         <p><strong>Home:</strong> {{ $student->profile->home ?? 'No data available' }}</p>
                         <p><strong>Age:</strong> {{ $student->profile->age ?? 'No data available' }}</p>
                     </div>

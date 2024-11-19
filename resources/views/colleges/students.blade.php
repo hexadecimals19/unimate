@@ -17,7 +17,7 @@
                 <input type="text" name="home" class="form-control" placeholder="Search by Home" value="{{ request('home') }}">
             </div>
             <div class="col-md-6 mb-2">
-                <input type="text" name="nationality" class="form-control" placeholder="Search by Nationality" value="{{ request('nationality') }}">
+                <input type="text" name="nationality" class="form-control" placeholder="Search by States" value="{{ request('nationality') }}">
             </div>
             <div class="col-md-6 mb-2">
                 <select name="interest" id="interest" class="form-control">

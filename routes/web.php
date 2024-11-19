@@ -98,8 +98,12 @@ Route::post('/reviews/store', [ReviewController::class, 'store'])->name('reviews
 Route::get('/roommates/confirmed_roommates', [RoommateController::class, 'confirmed'])->name('roommates.confirmed_roommates');
 
 
-
-
-
+Route::get('/districts-by-state/{stateName}', function($stateName) {
+    $state = \App\Models\State::where('name', $stateName)->first();
+    if ($state) {
+        return \App\Models\District::where('state_id', $state->id)->get();
+    }
+    return response()->json([]);
+});
 
 

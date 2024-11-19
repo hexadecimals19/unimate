@@ -82,13 +82,29 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="nationality">Nationality:</label>
-                    <input type="text" name="nationality" id="nationality" class="form-control" value="{{ old('nationality', $user->profile->nationality ?? '') }}">
+                    <label for="date_of_birth">Date of Birth:</label>
+                    <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" value="{{ old('date_of_birth', $user->profile->date_of_birth ?? '') }}">
                 </div>
 
+                <!-- State Dropdown -->
                 <div class="form-group">
-                    <label for="home">Home:</label>
-                    <input type="text" name="home" id="home" class="form-control" value="{{ old('home', $user->profile->home ?? '') }}">
+                    <label for="nationality">State:</label>
+                    <select name="nationality" id="state" class="form-control" required>
+                        <option value="">Select State</option>
+                        @foreach ($states as $state)
+                            <option value="{{ $state->name }}" {{ old('nationality', $user->profile->nationality ?? '') == $state->name ? 'selected' : '' }}>
+                                {{ $state->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <!-- District Dropdown -->
+                <div class="form-group">
+                    <label for="home">District:</label>
+                    <select name="home" id="district" class="form-control" required>
+                        <option value="">Select District</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -236,12 +252,53 @@
                 <button type="submit" class="btn btn-primary btn-lg">Update Profile</button>
             </form>
 
-             <!-- Delete account form -->
-             <form action="{{ route('profile.requestDelete') }}" method="GET" class="mt-4">
+            <!-- Delete account form -->
+            <form action="{{ route('profile.requestDelete') }}" method="GET" class="mt-4">
                 <button type="submit" class="btn btn-danger btn-lg">Request Account Deletion</button>
             </form>
 
         </div>
     </div>
 </div>
-@endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const stateSelect = document.getElementById('state');
+        const districtSelect = document.getElementById('district');
+
+        // Prepopulate district dropdown if a state is selected (for edit form)
+        const selectedState = stateSelect.value;
+        if (selectedState) {
+            populateDistricts(selectedState);
+        }
+
+        // Populate districts when a state is selected
+        stateSelect.addEventListener('change', function () {
+            const stateName = this.value;
+            populateDistricts(stateName);
+        });
+
+        function populateDistricts(stateName) {
+            // Clear previous options
+            districtSelect.innerHTML = '<option value="">Select District</option>';
+
+            if (stateName) {
+                fetch(`/districts-by-state/${stateName}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(district => {
+                            const option = document.createElement('option');
+                            option.value = district.name;
+                            option.textContent = district.name;
+                            if (district.name === "{{ old('home', $user->profile->home ?? '') }}") {
+                                option.selected = true;
+                            }
+                            districtSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error fetching districts:', error));
+            }
+        }
+    });
+    </script>
+    @endsection

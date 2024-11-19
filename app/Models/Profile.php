@@ -20,6 +20,7 @@ class Profile extends Model
         'nationality',
         'home',
         'age',
+        'date_of_birth',
         'interest1',
         'interest2',
         'interest3',
@@ -32,6 +33,11 @@ class Profile extends Model
         'pref4',
         'pref5',
     ];
+
+    protected $casts = [
+        'date_of_birth' => 'date',
+    ];
+
 
     /**
      * Define an inverse one-to-one relationship with the User model.

@@ -35,9 +35,11 @@
                     <!-- Profile Information -->
                     <h4>Profile Details</h4>
                     <p><strong>Bio:</strong> {{ $user->profile->bio ?? 'No data available' }}</p>
-                    <p><strong>Nationality:</strong> {{ $user->profile->nationality ?? 'No data available' }}</p>
-                    <p><strong>Home:</strong> {{ $user->profile->home ?? 'No data available' }}</p>
+                    <p><strong>State:</strong> {{ $user->profile->nationality ?? 'No data available' }}</p>
+                    <p><strong>Town or District:</strong> {{ $user->profile->home ?? 'No data available' }}</p>
                     <p><strong>Age:</strong> {{ $user->profile->age ?? 'No data available' }}</p>
+                    <p><strong>Date of Birth:</strong> {{ $user->profile->date_of_birth ? $user->profile->date_of_birth->format('d-m-Y') : 'No data available' }}</p>
+
                 </div>
                 @endif
             </div>
