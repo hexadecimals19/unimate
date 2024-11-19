@@ -32,10 +32,18 @@ class Profile extends Model
         'pref3',
         'pref4',
         'pref5',
+        'show_nationality',  // Add this
+        'show_home',          // Add this
+        'show_age',           // Add this
+        'show_date_of_birth', // Add this
     ];
 
     protected $casts = [
         'date_of_birth' => 'date',
+        'show_nationality' => 'boolean',
+        'show_home' => 'boolean',
+        'show_age' => 'boolean',
+        'show_date_of_birth' => 'boolean',
     ];
 
 

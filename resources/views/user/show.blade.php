@@ -36,10 +36,10 @@
                     <div class="col-md-6">
                         <h4>Profile Details</h4>
                         <p><strong>Bio:</strong> {{ $student->profile->bio ?? 'No data available' }}</p>
-                        <p><strong>State:</strong> {{ $student->profile->nationality ?? 'No data available' }}</p>
-                        <p><strong>District or Town:</strong> {{ $student->profile->home ?? 'No data available' }}</p>
-                        <p><strong>Home:</strong> {{ $student->profile->home ?? 'No data available' }}</p>
-                        <p><strong>Age:</strong> {{ $student->profile->age ?? 'No data available' }}</p>
+                        <p><strong>State:</strong> {{ $student->profile->show_nationality ? ($student->profile->nationality ?? 'No data available') : 'Hidden by user' }}</p>
+                        <p><strong>District or Town:</strong> {{ $student->profile->show_home ? ($student->profile->home ?? 'No data available') : 'Hidden by user' }}</p>
+                        <p><strong>Age:</strong> {{ $student->profile->show_age ? ($student->profile->age ?? 'No data available') : 'Hidden by user' }}</p>
+                        <p><strong>Date of Birth:</strong> {{ $student->profile->show_date_of_birth ? ($student->profile->date_of_birth ?? 'No data available') : 'Hidden by user' }}</p>
                     </div>
 
                     <!-- Interests Column -->

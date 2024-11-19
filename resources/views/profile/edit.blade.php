@@ -247,6 +247,52 @@
     </select>
 </div>
 
+<form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <!-- Existing fields for user profile information -->
+
+    <!-- Visibility Controls -->
+    <div class="form-group">
+        <label>
+            <!-- Hidden input with value 0 -->
+            <input type="hidden" name="show_nationality" value="0">
+            <!-- Checkbox input with value 1 -->
+            <input type="checkbox" name="show_nationality" value="1" {{ old('show_nationality', $user->profile->show_nationality) ? 'checked' : '' }}>
+            Show Nationality
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label>
+            <!-- Hidden input with value 0 -->
+            <input type="hidden" name="show_home" value="0">
+            <!-- Checkbox input with value 1 -->
+            <input type="checkbox" name="show_home" value="1" {{ old('show_home', $user->profile->show_home) ? 'checked' : '' }}>
+            Show Home (District)
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label>
+            <!-- Hidden input with value 0 -->
+            <input type="hidden" name="show_age" value="0">
+            <!-- Checkbox input with value 1 -->
+            <input type="checkbox" name="show_age" value="1" {{ old('show_age', $user->profile->show_age) ? 'checked' : '' }}>
+            Show Age
+        </label>
+    </div>
+
+    <div class="form-group">
+        <label>
+            <!-- Hidden input with value 0 -->
+            <input type="hidden" name="show_date_of_birth" value="0">
+            <!-- Checkbox input with value 1 -->
+            <input type="checkbox" name="show_date_of_birth" value="1" {{ old('show_date_of_birth', $user->profile->show_date_of_birth) ? 'checked' : '' }}>
+            Show Date of Birth
+        </label>
+    </div>
+
+
 
                 <br>
                 <button type="submit" class="btn btn-primary btn-lg">Update Profile</button>

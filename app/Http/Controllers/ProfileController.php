@@ -35,7 +35,6 @@ class ProfileController extends Controller
         return view('profile.edit', compact('user', 'colleges', 'states')); // Pass user, colleges, and states data to view
     }
 
-
     // Update the user's profile
     public function update(Request $request)
     {
@@ -63,6 +62,10 @@ class ProfileController extends Controller
             'pref3' => 'nullable|string',
             'pref4' => 'nullable|string',
             'pref5' => 'nullable|string',
+            'show_nationality' => 'sometimes|boolean',
+            'show_home' => 'sometimes|boolean',
+            'show_age' => 'sometimes|boolean',
+            'show_date_of_birth' => 'sometimes|boolean',
         ]);
 
         // Get the authenticated user
@@ -116,6 +119,10 @@ class ProfileController extends Controller
                 'pref3' => $request->pref3,
                 'pref4' => $request->pref4,
                 'pref5' => $request->pref5,
+                'show_nationality' => $request->has('show_nationality') ? $request->input('show_nationality') : false,
+                'show_home' => $request->has('show_home') ? $request->input('show_home') : false,
+                'show_age' => $request->has('show_age') ? $request->input('show_age') : false,
+                'show_date_of_birth' => $request->has('show_date_of_birth') ? $request->input('show_date_of_birth') : false,
             ]
         );
 
