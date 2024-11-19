@@ -81,6 +81,22 @@
                 <p>No profile information available.</p>
             @endif
 
+            <!-- Reviews and Ratings Section -->
+            <hr>
+            <h4>Reviews and Ratings</h4>
+            @if ($student->reviewsReceived->isNotEmpty())
+                @foreach ($student->reviewsReceived as $review)
+                    <div class="mb-3">
+                        <strong>Rating:</strong> {{ $review->rating }} / 5<br>
+                        <strong>Review:</strong> {{ $review->review ?? 'No review provided' }}<br>
+                        <small class="text-muted">Reviewed by: {{ $review->user->name }} on {{ $review->created_at->format('Y-m-d') }}</small>
+                    </div>
+                    <hr>
+                @endforeach
+            @else
+                <p>No reviews available.</p>
+            @endif
+
             <!-- Submit Roommate Request Button -->
             <div class="text-center mt-4">
                 <form id="roommate-request-form" action="{{ route('roommate.apply', ['roommateId' => $student->id]) }}" method="POST">

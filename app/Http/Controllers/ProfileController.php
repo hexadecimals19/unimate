@@ -17,6 +17,10 @@ class ProfileController extends Controller
     public function show()
     {
         $user = Auth::user(); // Get the authenticated user
+
+        // Load the user's profile and reviews
+        $user->load('profile', 'reviewsReceived');
+
         return view('profile.show', compact('user')); // Return the 'profile.show' view with user data
     }
 
