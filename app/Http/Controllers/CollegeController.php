@@ -39,6 +39,14 @@ class CollegeController extends Controller
             $studentsQuery->where('name', 'LIKE', '%' . $request->input('name') . '%');
         }
 
+        if ($request->filled('studentid')) {
+            $studentsQuery->where('studentid', 'LIKE', '%' . $request->input('studentid') . '%');
+        }
+
+        if ($request->filled('studentemail')) {
+            $studentsQuery->where('studentemail', 'LIKE', '%' . $request->input('studentemail') . '%');
+        }
+
         // Apply the 'age' filter if it exists in the request
         if ($request->filled('age')) {
             $studentsQuery->whereHas('profile', function ($query) use ($request) {
