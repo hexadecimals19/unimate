@@ -72,6 +72,12 @@ class ProfileController extends Controller
         'facebook_profile' => 'nullable|url',
         'twitter_profile' => 'nullable|url',
         'instagram_profile' => 'nullable|url',
+        'show_phone_number' => 'sometimes|boolean',
+        'show_whatsapp' => 'sometimes|boolean',
+        'show_telegram' => 'sometimes|boolean',
+        'show_facebook_profile' => 'sometimes|boolean',
+        'show_twitter_profile' => 'sometimes|boolean',
+        'show_instagram_profile' => 'sometimes|boolean',
     ]);
 
         // Get the authenticated user
@@ -141,11 +147,14 @@ class ProfileController extends Controller
                 'facebook_profile' => $request->facebook_profile,
                 'twitter_profile' => $request->twitter_profile,
                 'instagram_profile' => $request->instagram_profile,
+                'show_phone_number' => $request->has('show_phone_number') ? $request->input('show_phone_number') : false,
+                'show_whatsapp' => $request->has('show_whatsapp') ? $request->input('show_whatsapp') : false,
+                'show_telegram' => $request->has('show_telegram') ? $request->input('show_telegram') : false,
+                'show_facebook_profile' => $request->has('show_facebook_profile') ? $request->input('show_facebook_profile') : false,
+                'show_twitter_profile' => $request->has('show_twitter_profile') ? $request->input('show_twitter_profile') : false,
+                'show_instagram_profile' => $request->has('show_instagram_profile') ? $request->input('show_instagram_profile') : false,
             ]
         );
-
-        
-
 
         // Redirect to the profile page with a success message
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');

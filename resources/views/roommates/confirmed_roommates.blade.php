@@ -26,35 +26,69 @@
                                     <strong>Age:</strong> {{ $roommate->profile->age ?? 'N/A' }}<br>
                                     <strong>State:</strong> {{ $roommate->profile->nationality ?? 'N/A' }}<br>
                                     <strong>District:</strong> {{ $roommate->profile->home ?? 'N/A' }}<br>
-                                    <strong>Home:</strong> {{ $roommate->profile->home ?? 'N/A' }}<br>
                                     <strong>Bio:</strong> {{ $roommate->profile->bio ?? 'N/A' }}
                                 </p>
                                 @if ($roommate->contact)
                                     <hr>
                                     <h6>Contact Information</h6>
                                     <p class="card-text">
-                                        <strong>Phone Number:</strong> {{ $roommate->contact->phone_number ?? 'N/A' }}<br>
-                                        <strong>WhatsApp:</strong> {{ $roommate->contact->whatsapp ?? 'N/A' }}<br>
-                                        <strong>Telegram:</strong> {{ $roommate->contact->telegram ?? 'N/A' }}<br>
+                                        <strong>Phone Number:</strong>
+                                        @if ($roommate->contact->show_phone_number)
+                                            {{ $roommate->contact->phone_number ?? 'N/A' }}
+                                        @else
+                                            Hidden by user
+                                        @endif
+                                        <br>
+
+                                        <strong>WhatsApp:</strong>
+                                        @if ($roommate->contact->show_whatsapp)
+                                            {{ $roommate->contact->whatsapp ?? 'N/A' }}
+                                        @else
+                                            Hidden by user
+                                        @endif
+                                        <br>
+
+                                        <strong>Telegram:</strong>
+                                        @if ($roommate->contact->show_telegram)
+                                            {{ $roommate->contact->telegram ?? 'N/A' }}
+                                        @else
+                                            Hidden by user
+                                        @endif
+                                        <br>
+
                                         <strong>Facebook Profile:</strong>
-                                        @if ($roommate->contact->facebook_profile)
-                                            <a href="{{ $roommate->contact->facebook_profile }}" target="_blank">{{ $roommate->contact->facebook_profile }}</a>
+                                        @if ($roommate->contact->show_facebook_profile)
+                                            @if ($roommate->contact->facebook_profile)
+                                                <a href="{{ $roommate->contact->facebook_profile }}" target="_blank">{{ $roommate->contact->facebook_profile }}</a>
+                                            @else
+                                                N/A
+                                            @endif
                                         @else
-                                            N/A
+                                            Hidden by user
                                         @endif
                                         <br>
+
                                         <strong>Twitter Profile:</strong>
-                                        @if ($roommate->contact->twitter_profile)
-                                            <a href="{{ $roommate->contact->twitter_profile }}" target="_blank">{{ $roommate->contact->twitter_profile }}</a>
+                                        @if ($roommate->contact->show_twitter_profile)
+                                            @if ($roommate->contact->twitter_profile)
+                                                <a href="{{ $roommate->contact->twitter_profile }}" target="_blank">{{ $roommate->contact->twitter_profile }}</a>
+                                            @else
+                                                N/A
+                                            @endif
                                         @else
-                                            N/A
+                                            Hidden by user
                                         @endif
                                         <br>
+
                                         <strong>Instagram Profile:</strong>
-                                        @if ($roommate->contact->instagram_profile)
-                                            <a href="{{ $roommate->contact->instagram_profile }}" target="_blank">{{ $roommate->contact->instagram_profile }}</a>
+                                        @if ($roommate->contact->show_instagram_profile)
+                                            @if ($roommate->contact->instagram_profile)
+                                                <a href="{{ $roommate->contact->instagram_profile }}" target="_blank">{{ $roommate->contact->instagram_profile }}</a>
+                                            @else
+                                                N/A
+                                            @endif
                                         @else
-                                            N/A
+                                            Hidden by user
                                         @endif
                                     </p>
                                 @endif

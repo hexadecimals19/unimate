@@ -17,6 +17,12 @@ class UserContact extends Model
         'facebook_profile',
         'twitter_profile',
         'instagram_profile',
+        'show_phone_number',
+        'show_whatsapp',
+        'show_telegram',
+        'show_facebook_profile',
+        'show_twitter_profile',
+        'show_instagram_profile',
     ];
 
     public function user()

@@ -77,36 +77,69 @@
 
                 <div class="form-group">
                     <label for="phone_number">Phone Number:</label>
-                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ old('phone_number', $user->profile->phone_number ?? '') }}" placeholder="Enter your phone number (e.g. +1234567890)">
+                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ old('phone_number', $user->contact->phone_number ?? '') }}" placeholder="Enter your phone number (e.g. +1234567890)">
+                </div>
+
+                <div class="form-check">
+                    <input type="hidden" name="show_phone_number" value="0">
+                    <input type="checkbox" name="show_phone_number" value="1" class="form-check-input" id="showPhoneNumber" {{ old('show_phone_number', $user->contact->show_phone_number ?? false) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="showPhoneNumber">Show Phone Number</label>
                 </div>
 
                 <div class="form-group">
                     <label for="whatsapp">WhatsApp:</label>
-                    <input type="text" name="whatsapp" id="whatsapp" class="form-control" value="{{ old('whatsapp', $user->profile->whatsapp ?? '') }}" placeholder="Enter your WhatsApp number (e.g. +1234567890)">
+                    <input type="text" name="whatsapp" id="whatsapp" class="form-control" value="{{ old('whatsapp', $user->contact->whatsapp ?? '') }}" placeholder="Enter your WhatsApp number (e.g. +1234567890)">
+                </div>
+
+                <div class="form-check">
+                    <input type="hidden" name="show_whatsapp" value="0">
+                    <input type="checkbox" name="show_whatsapp" value="1" class="form-check-input" id="showWhatsApp" {{ old('show_whatsapp', $user->contact->show_whatsapp ?? false) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="showWhatsApp">Show WhatsApp</label>
                 </div>
 
                 <div class="form-group">
                     <label for="telegram">Telegram:</label>
-                    <input type="text" name="telegram" id="telegram" class="form-control" value="{{ old('telegram', $user->profile->telegram ?? '') }}" placeholder="Enter your Telegram username (e.g. @username)">
+                    <input type="text" name="telegram" id="telegram" class="form-control" value="{{ old('telegram', $user->contact->telegram ?? '') }}" placeholder="Enter your Telegram username (e.g. @username)">
+                </div>
+
+                <div class="form-check">
+                    <input type="hidden" name="show_telegram" value="0">
+                    <input type="checkbox" name="show_telegram" value="1" class="form-check-input" id="showTelegram" {{ old('show_telegram', $user->contact->show_telegram ?? false) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="showTelegram">Show Telegram</label>
                 </div>
 
                 <div class="form-group">
                     <label for="facebook_profile">Facebook Profile:</label>
-                    <input type="url" name="facebook_profile" id="facebook_profile" class="form-control" value="{{ old('facebook_profile', $user->profile->facebook_profile ?? '') }}" placeholder="Enter the link to your Facebook profile">
+                    <input type="url" name="facebook_profile" id="facebook_profile" class="form-control" value="{{ old('facebook_profile', $user->contact->facebook_profile ?? '') }}" placeholder="Enter the link to your Facebook profile">
+                </div>
+
+                <div class="form-check">
+                    <input type="hidden" name="show_facebook_profile" value="0">
+                    <input type="checkbox" name="show_facebook_profile" value="1" class="form-check-input" id="showFacebookProfile" {{ old('show_facebook_profile', $user->contact->show_facebook_profile ?? false) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="showFacebookProfile">Show Facebook Profile</label>
                 </div>
 
                 <div class="form-group">
                     <label for="twitter_profile">Twitter Profile:</label>
-                    <input type="url" name="twitter_profile" id="twitter_profile" class="form-control" value="{{ old('twitter_profile', $user->profile->twitter_profile ?? '') }}" placeholder="Enter the link to your Twitter profile">
+                    <input type="url" name="twitter_profile" id="twitter_profile" class="form-control" value="{{ old('twitter_profile', $user->contact->twitter_profile ?? '') }}" placeholder="Enter the link to your Twitter profile">
+                </div>
+
+                <div class="form-check">
+                    <input type="hidden" name="show_twitter_profile" value="0">
+                    <input type="checkbox" name="show_twitter_profile" value="1" class="form-check-input" id="showTwitterProfile" {{ old('show_twitter_profile', $user->contact->show_twitter_profile ?? false) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="showTwitterProfile">Show Twitter Profile</label>
                 </div>
 
                 <div class="form-group">
                     <label for="instagram_profile">Instagram Profile:</label>
-                    <input type="url" name="instagram_profile" id="instagram_profile" class="form-control" value="{{ old('instagram_profile', $user->profile->instagram_profile ?? '') }}" placeholder="Enter the link to your Instagram profile">
+                    <input type="url" name="instagram_profile" id="instagram_profile" class="form-control" value="{{ old('instagram_profile', $user->contact->instagram_profile ?? '') }}" placeholder="Enter the link to your Instagram profile">
                 </div>
 
-
-
+                <div class="form-check">
+                    <input type="hidden" name="show_instagram_profile" value="0">
+                    <input type="checkbox" name="show_instagram_profile" value="1" class="form-check-input" id="showInstagramProfile" {{ old('show_instagram_profile', $user->contact->show_instagram_profile ?? false) ? 'checked' : '' }}>
+                    <label class="form-check-label" for="showInstagramProfile">Show Instagram Profile</label>
+                </div>
                 <!-- Profile Information -->
                 <div class="form-group">
                     <label for="bio">Bio:</label>
