@@ -16,8 +16,11 @@
     <!-- Navbar Section -->
     <header class="bg-white dark:bg-white w-full shadow-md">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            flex items-center
+<!-- Logo -->
+<div class="flex items-center">
+    <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="mr-3" style="max-width: 50px;">
+    <span class="text-xl font-semibold" style="color: #211d70;">Unimate</span>
+</div>
 
             <!-- Navigation -->
             <nav class="flex space-x-4">

@@ -54,6 +54,9 @@
         <a href="{{ route('recommend.roommates') }}" class="btn btn-success">Recommended Roommates</a>
     </div>
 
+    <br>
+    <br>
+
     @if($students->isEmpty())
         @if(request()->hasAny(['name', 'age', 'home', 'nationality', 'interest', 'lifestyle', 'preference']))
             <p class="text-center mt-4">No students match your search criteria.</p>
