@@ -23,13 +23,12 @@
         html, body {
             height: 100%;
             margin: 0;
+            background-color: #b3e4f5; /* Updated background color to match your image */
         }
 
         body {
             display: flex;
             flex-direction: column;
-            background: linear-gradient(to bottom, white, #4DB1E2);
-            min-height: 100%;
         }
 
         #app {
@@ -48,6 +47,7 @@
             padding: 20px 0;
         }
     </style>
+
 </head>
 <body>
     <div id="app">

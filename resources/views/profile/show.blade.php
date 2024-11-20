@@ -21,19 +21,17 @@
 
         <div class="card-body">
             <div class="row mb-4">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <!-- Basic User Information -->
                     <h4>Basic Information</h4>
                     <p><strong>Email:</strong> {{ $user->studentemail }}</p>
                     <p><strong>Student ID:</strong> {{ $user->studentid }}</p>
                     <p><strong>College:</strong> {{ $user->studentcollege ?? 'No data available' }}</p>
                     <p><strong>Gender:</strong> {{ $user->studentgender ?? 'No data available' }}</p>
-
-
                 </div>
 
                 @if ($user->profile)
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <!-- Profile Information -->
                     <h4>Profile Details</h4>
                     <p><strong>Bio:</strong> {{ $user->profile->bio ?? 'No data available' }}</p>
@@ -43,6 +41,37 @@
                     <p><strong>Date of Birth:</strong> {{ $user->profile->date_of_birth ? $user->profile->date_of_birth->format('d-m-Y') : 'No data available' }}</p>
                 </div>
                 @endif
+
+                @if ($user->contact)
+                <div class="col-md-4">
+                    <!-- Contact Information -->
+                    <h4>Contact Information</h4>
+                    <p><strong>Phone Number:</strong> {{ $user->contact->phone_number ?? 'No data available' }}</p>
+                    <p><strong>WhatsApp:</strong> {{ $user->contact->whatsapp ?? 'No data available' }}</p>
+                    <p><strong>Telegram:</strong> {{ $user->contact->telegram ?? 'No data available' }}</p>
+                    <p><strong>Facebook Profile:</strong>
+                        @if ($user->contact->facebook_profile)
+                            <a href="{{ $user->contact->facebook_profile }}" target="_blank">{{ $user->contact->facebook_profile }}</a>
+                        @else
+                            No data available
+                        @endif
+                    </p>
+                    <p><strong>Twitter Profile:</strong>
+                        @if ($user->contact->twitter_profile)
+                            <a href="{{ $user->contact->twitter_profile }}" target="_blank">{{ $user->contact->twitter_profile }}</a>
+                        @else
+                            No data available
+                        @endif
+                    </p>
+                    <p><strong>Instagram Profile:</strong>
+                        @if ($user->contact->instagram_profile)
+                            <a href="{{ $user->contact->instagram_profile }}" target="_blank">{{ $user->contact->instagram_profile }}</a>
+                        @else
+                            No data available
+                        @endif
+                    </p>
+                </div>
+                @endif
             </div>
 
             @if ($user->profile)
@@ -50,7 +79,7 @@
 
                 <div class="row mb-4">
                     <!-- Interests Column -->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <h4>Interests</h4>
                         <ul>
                             <li><strong>Interest 1:</strong> {{ $user->profile->interest1 ?? 'No data available' }}</li>
@@ -60,7 +89,7 @@
                     </div>
 
                     <!-- Lifestyles Column -->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <h4>Lifestyles</h4>
                         <ul>
                             <li><strong>Lifestyle 1:</strong> {{ $user->profile->lifestyle1 ?? 'No data available' }}</li>
@@ -68,67 +97,19 @@
                             <li><strong>Lifestyle 3:</strong> {{ $user->profile->lifestyle3 ?? 'No data available' }}</li>
                         </ul>
                     </div>
-                </div>
 
-                <div class="row mb-4">
                     <!-- Preferences Column -->
-                    <div class="col-md-12">
+                    <div class="col-md-4">
                         <h4>Preferences</h4>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <p><strong>Preference 1:</strong> {{ $user->profile->pref1 ?? 'No data available' }}</p>
-                            </div>
-                            <div class="col-md-4">
-                                <p><strong>Preference 2:</strong> {{ $user->profile->pref2 ?? 'No data available' }}</p>
-                            </div>
-                            <div class="col-md-4">
-                                <p><strong>Preference 3:</strong> {{ $user->profile->pref3 ?? 'No data available' }}</p>
-                            </div>
-                            <div class="col-md-4">
-                                <p><strong>Preference 4:</strong> {{ $user->profile->pref4 ?? 'No data available' }}</p>
-                            </div>
-                            <div class="col-md-4">
-                                <p><strong>Preference 5:</strong> {{ $user->profile->pref5 ?? 'No data available' }}</p>
-                            </div>
-                        </div>
+                        <ul>
+                            <li><strong>Preference 1:</strong> {{ $user->profile->pref1 ?? 'No data available' }}</li>
+                            <li><strong>Preference 2:</strong> {{ $user->profile->pref2 ?? 'No data available' }}</li>
+                            <li><strong>Preference 3:</strong> {{ $user->profile->pref3 ?? 'No data available' }}</li>
+                            <li><strong>Preference 4:</strong> {{ $user->profile->pref4 ?? 'No data available' }}</li>
+                            <li><strong>Preference 5:</strong> {{ $user->profile->pref5 ?? 'No data available' }}</li>
+                        </ul>
                     </div>
                 </div>
-
-                <!-- Contact Details Section -->
-@if ($user->contact)
-<hr>
-
-<div class="row mb-4">
-    <!-- Contact Information -->
-    <div class="col-md-6">
-        <h4>Contact Information</h4>
-        <p><strong>Phone Number:</strong> {{ $user->contact->phone_number ?? 'No data available' }}</p>
-        <p><strong>WhatsApp:</strong> {{ $user->contact->whatsapp ?? 'No data available' }}</p>
-        <p><strong>Telegram:</strong> {{ $user->contact->telegram ?? 'No data available' }}</p>
-        <p><strong>Facebook Profile:</strong>
-            @if ($user->contact->facebook_profile)
-                <a href="{{ $user->contact->facebook_profile }}" target="_blank">{{ $user->contact->facebook_profile }}</a>
-            @else
-                No data available
-            @endif
-        </p>
-        <p><strong>Twitter Profile:</strong>
-            @if ($user->contact->twitter_profile)
-                <a href="{{ $user->contact->twitter_profile }}" target="_blank">{{ $user->contact->twitter_profile }}</a>
-            @else
-                No data available
-            @endif
-        </p>
-        <p><strong>Instagram Profile:</strong>
-            @if ($user->contact->instagram_profile)
-                <a href="{{ $user->contact->instagram_profile }}" target="_blank">{{ $user->contact->instagram_profile }}</a>
-            @else
-                No data available
-            @endif
-        </p>
-    </div>
-</div>
-@endif
             @else
                 <div class="row mb-4">
                     <div class="col-md-12">
