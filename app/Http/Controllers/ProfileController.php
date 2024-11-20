@@ -37,36 +37,42 @@ class ProfileController extends Controller
 
     // Update the user's profile
     public function update(Request $request)
-    {
-        // Validate the request data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'studentemail' => 'required|email',
-            'studentid' => 'required',
-            'studentgender' => 'required',
-            'studentcollege' => 'required',
-            'studentimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'bio' => 'nullable|string',
-            'nationality' => 'nullable|string',
-            'home' => 'nullable|string',
-            'age' => 'nullable|integer',
-            'date_of_birth' => 'nullable|date',
-            'interest1' => 'nullable|string',
-            'interest2' => 'nullable|string',
-            'interest3' => 'nullable|string',
-            'lifestyle1' => 'nullable|string',
-            'lifestyle2' => 'nullable|string',
-            'lifestyle3' => 'nullable|string',
-            'pref1' => 'nullable|string',
-            'pref2' => 'nullable|string',
-            'pref3' => 'nullable|string',
-            'pref4' => 'nullable|string',
-            'pref5' => 'nullable|string',
-            'show_nationality' => 'sometimes|boolean',
-            'show_home' => 'sometimes|boolean',
-            'show_age' => 'sometimes|boolean',
-            'show_date_of_birth' => 'sometimes|boolean',
-        ]);
+{
+    // Validate the request data
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'studentemail' => 'required|email',
+        'studentid' => 'required',
+        'studentgender' => 'required',
+        'studentcollege' => 'required',
+        'studentimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'bio' => 'nullable|string',
+        'nationality' => 'nullable|string',
+        'home' => 'nullable|string',
+        'age' => 'nullable|integer',
+        'date_of_birth' => 'nullable|date',
+        'interest1' => 'nullable|string',
+        'interest2' => 'nullable|string',
+        'interest3' => 'nullable|string',
+        'lifestyle1' => 'nullable|string',
+        'lifestyle2' => 'nullable|string',
+        'lifestyle3' => 'nullable|string',
+        'pref1' => 'nullable|string',
+        'pref2' => 'nullable|string',
+        'pref3' => 'nullable|string',
+        'pref4' => 'nullable|string',
+        'pref5' => 'nullable|string',
+        'show_nationality' => 'sometimes|boolean',
+        'show_home' => 'sometimes|boolean',
+        'show_age' => 'sometimes|boolean',
+        'show_date_of_birth' => 'sometimes|boolean',
+        'phone_number' => 'nullable|string|max:20',
+        'whatsapp' => 'nullable|string|max:20',
+        'telegram' => 'nullable|string|max:50',
+        'facebook_profile' => 'nullable|url',
+        'twitter_profile' => 'nullable|url',
+        'instagram_profile' => 'nullable|url',
+    ]);
 
         // Get the authenticated user
         $user = Auth::user();
@@ -125,6 +131,21 @@ class ProfileController extends Controller
                 'show_date_of_birth' => $request->has('show_date_of_birth') ? $request->input('show_date_of_birth') : false,
             ]
         );
+
+        $user->contact()->updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'phone_number' => $request->phone_number,
+                'whatsapp' => $request->whatsapp,
+                'telegram' => $request->telegram,
+                'facebook_profile' => $request->facebook_profile,
+                'twitter_profile' => $request->twitter_profile,
+                'instagram_profile' => $request->instagram_profile,
+            ]
+        );
+
+        
+
 
         // Redirect to the profile page with a success message
         return redirect()->route('profile.show')->with('success', 'Profile updated successfully');

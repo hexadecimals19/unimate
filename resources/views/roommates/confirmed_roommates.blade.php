@@ -29,6 +29,35 @@
                                     <strong>Home:</strong> {{ $roommate->profile->home ?? 'N/A' }}<br>
                                     <strong>Bio:</strong> {{ $roommate->profile->bio ?? 'N/A' }}
                                 </p>
+                                @if ($roommate->contact)
+                                    <hr>
+                                    <h6>Contact Information</h6>
+                                    <p class="card-text">
+                                        <strong>Phone Number:</strong> {{ $roommate->contact->phone_number ?? 'N/A' }}<br>
+                                        <strong>WhatsApp:</strong> {{ $roommate->contact->whatsapp ?? 'N/A' }}<br>
+                                        <strong>Telegram:</strong> {{ $roommate->contact->telegram ?? 'N/A' }}<br>
+                                        <strong>Facebook Profile:</strong>
+                                        @if ($roommate->contact->facebook_profile)
+                                            <a href="{{ $roommate->contact->facebook_profile }}" target="_blank">{{ $roommate->contact->facebook_profile }}</a>
+                                        @else
+                                            N/A
+                                        @endif
+                                        <br>
+                                        <strong>Twitter Profile:</strong>
+                                        @if ($roommate->contact->twitter_profile)
+                                            <a href="{{ $roommate->contact->twitter_profile }}" target="_blank">{{ $roommate->contact->twitter_profile }}</a>
+                                        @else
+                                            N/A
+                                        @endif
+                                        <br>
+                                        <strong>Instagram Profile:</strong>
+                                        @if ($roommate->contact->instagram_profile)
+                                            <a href="{{ $roommate->contact->instagram_profile }}" target="_blank">{{ $roommate->contact->instagram_profile }}</a>
+                                        @else
+                                            N/A
+                                        @endif
+                                    </p>
+                                @endif
                             </div>
                             <div class="card-footer d-flex justify-content-between align-items-center">
                                 <span class="text-muted">Confirmed Roommate</span>

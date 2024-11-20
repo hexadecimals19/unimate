@@ -75,6 +75,38 @@
                     @endif
                 </div>
 
+                <div class="form-group">
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" name="phone_number" id="phone_number" class="form-control" value="{{ old('phone_number', $user->profile->phone_number ?? '') }}" placeholder="Enter your phone number (e.g. +1234567890)">
+                </div>
+
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp:</label>
+                    <input type="text" name="whatsapp" id="whatsapp" class="form-control" value="{{ old('whatsapp', $user->profile->whatsapp ?? '') }}" placeholder="Enter your WhatsApp number (e.g. +1234567890)">
+                </div>
+
+                <div class="form-group">
+                    <label for="telegram">Telegram:</label>
+                    <input type="text" name="telegram" id="telegram" class="form-control" value="{{ old('telegram', $user->profile->telegram ?? '') }}" placeholder="Enter your Telegram username (e.g. @username)">
+                </div>
+
+                <div class="form-group">
+                    <label for="facebook_profile">Facebook Profile:</label>
+                    <input type="url" name="facebook_profile" id="facebook_profile" class="form-control" value="{{ old('facebook_profile', $user->profile->facebook_profile ?? '') }}" placeholder="Enter the link to your Facebook profile">
+                </div>
+
+                <div class="form-group">
+                    <label for="twitter_profile">Twitter Profile:</label>
+                    <input type="url" name="twitter_profile" id="twitter_profile" class="form-control" value="{{ old('twitter_profile', $user->profile->twitter_profile ?? '') }}" placeholder="Enter the link to your Twitter profile">
+                </div>
+
+                <div class="form-group">
+                    <label for="instagram_profile">Instagram Profile:</label>
+                    <input type="url" name="instagram_profile" id="instagram_profile" class="form-control" value="{{ old('instagram_profile', $user->profile->instagram_profile ?? '') }}" placeholder="Enter the link to your Instagram profile">
+                </div>
+
+
+
                 <!-- Profile Information -->
                 <div class="form-group">
                     <label for="bio">Bio:</label>

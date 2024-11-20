@@ -28,6 +28,8 @@
                     <p><strong>Student ID:</strong> {{ $user->studentid }}</p>
                     <p><strong>College:</strong> {{ $user->studentcollege ?? 'No data available' }}</p>
                     <p><strong>Gender:</strong> {{ $user->studentgender ?? 'No data available' }}</p>
+
+
                 </div>
 
                 @if ($user->profile)
@@ -39,7 +41,6 @@
                     <p><strong>Town or District:</strong> {{ $user->profile->home ?? 'No data available' }}</p>
                     <p><strong>Age:</strong> {{ $user->profile->age ?? 'No data available' }}</p>
                     <p><strong>Date of Birth:</strong> {{ $user->profile->date_of_birth ? $user->profile->date_of_birth->format('d-m-Y') : 'No data available' }}</p>
-
                 </div>
                 @endif
             </div>
@@ -92,6 +93,42 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Contact Details Section -->
+@if ($user->contact)
+<hr>
+
+<div class="row mb-4">
+    <!-- Contact Information -->
+    <div class="col-md-6">
+        <h4>Contact Information</h4>
+        <p><strong>Phone Number:</strong> {{ $user->contact->phone_number ?? 'No data available' }}</p>
+        <p><strong>WhatsApp:</strong> {{ $user->contact->whatsapp ?? 'No data available' }}</p>
+        <p><strong>Telegram:</strong> {{ $user->contact->telegram ?? 'No data available' }}</p>
+        <p><strong>Facebook Profile:</strong>
+            @if ($user->contact->facebook_profile)
+                <a href="{{ $user->contact->facebook_profile }}" target="_blank">{{ $user->contact->facebook_profile }}</a>
+            @else
+                No data available
+            @endif
+        </p>
+        <p><strong>Twitter Profile:</strong>
+            @if ($user->contact->twitter_profile)
+                <a href="{{ $user->contact->twitter_profile }}" target="_blank">{{ $user->contact->twitter_profile }}</a>
+            @else
+                No data available
+            @endif
+        </p>
+        <p><strong>Instagram Profile:</strong>
+            @if ($user->contact->instagram_profile)
+                <a href="{{ $user->contact->instagram_profile }}" target="_blank">{{ $user->contact->instagram_profile }}</a>
+            @else
+                No data available
+            @endif
+        </p>
+    </div>
+</div>
+@endif
             @else
                 <div class="row mb-4">
                     <div class="col-md-12">

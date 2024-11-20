@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Profile;
+use App\Models\UserContact;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -99,5 +100,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function reviewsReceived()
     {
         return $this->hasMany(Review::class, 'roommate_id');
+    }
+
+    public function contact()
+    {
+        return $this->hasOne(UserContact::class);
     }
 }
