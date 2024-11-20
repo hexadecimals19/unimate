@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Models\College;
+use App\Models\State; // Assuming you have a State model
+use App\Models\District; // Assuming you have a District model
+use Illuminate\Http\Request;
 
 class CollegeController extends Controller
 {
@@ -96,8 +98,11 @@ class CollegeController extends Controller
         // Get the filtered results
         $students = $studentsQuery->get();
 
-        // Pass the results to the view
-        return view('colleges.students', compact('college', 'students'));
+        // Retrieve the states and districts from the database
+        $states = State::with('districts')->get();
+
+        // Pass the results and states to the view
+        return view('colleges.students', compact('college', 'students', 'states'));
     }
 
     // Store a new college
