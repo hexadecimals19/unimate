@@ -50,13 +50,29 @@
     <!-- Main Hero Section -->
     <section class="bg-[#4DB1E2] text-white py-20">
         <div class="container mx-auto text-center">
+            <!-- Logo -->
+            <img
+                src="{{ asset('images/unimatelogo.png') }}"
+                alt="Unimate Logo"
+                class="mx-auto mb-6"
+                style="max-width: 200px; width: 100%; height: auto;"
+            >
+
+            <!-- Heading -->
             <h1 class="text-5xl font-bold mb-6">Welcome to Unimate</h1>
-            <p class="text-lg mb-10">Your one-stop platform for connecting with students, exploring colleges, and experiencing campus life like never before!</p>
+
+            <!-- Subtext -->
+            <p class="text-lg mb-10">
+                Your one-stop platform for connecting with students, exploring colleges, and experiencing campus life like never before!
+            </p>
+
+            <!-- Call to Action Button -->
             <a href="{{ route('register') }}" class="px-8 py-4 bg-white text-[#211d70] font-semibold rounded-lg shadow-md transition hover:bg-gray-100">
                 Join Us Today
             </a>
         </div>
     </section>
+
 
     <!-- Features Section -->
     <section class="py-16">
