@@ -12,7 +12,7 @@ class CollegeSeeder extends Seeder
         College::create([
             'collegename' => 'Mawar',
             'collegeimage' => 'images/mawarLogo.png',
-            'collegedesc' => 'Female College',
+            'collegedesc' => 'Mawar College is one of the prominent residential colleges at Universiti Teknologi MARA (UiTM) Shah Alam, known for its comfortable living environment and supportive community. Located within the lush campus of UiTM Shah Alam, Mawar College provides accommodation to both local and international students, fostering a diverse and inclusive environment. The college features modern facilities, including spacious dormitory rooms, study lounges, and recreational areas. With a focus on providing a well-rounded student experience, Mawar College promotes both academic and social development through various events, workshops, and community activities.',
             'collegetype' => 2, // Female college
         ]);
 
