@@ -1,96 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container mt-5 text-center">
         <h1 class="mb-4">Your Confirmed Roommates</h1>
 
         @if($confirmedRoommates->isEmpty())
-            <p>You do not have any confirmed roommates yet.</p>
+            <div class="alert alert-info text-center">
+                <div class="mt-4 text-center">
+                    <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="img-fluid" style="max-width: 150px;">
+                </div>
+                <p>You do not have any confirmed roommates yet.</p>
+            </div>
         @else
-            <div class="row">
+            <div class="row g-4">
                 @foreach($confirmedRoommates as $roommateApplication)
                     @php
                         $roommate = $roommateApplication->applicant_id == Auth::id()
                                     ? $roommateApplication->roommate
                                     : $roommateApplication->applicant;
-                        // Check if a review already exists for this roommate
                         $existingReview = \App\Models\Review::where('user_id', Auth::id())
                                                             ->where('roommate_id', $roommate->id)
                                                             ->first();
                     @endphp
-                    <div class="col-md-4 mb-4">
-                        <div class="card h-100">
+
+
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 shadow-sm border-0">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $roommate->name }}</h5>
-                                <p class="card-text">
-                                    <strong>Age:</strong> {{ $roommate->profile->age ?? 'N/A' }}<br>
-                                    <strong>State:</strong> {{ $roommate->profile->nationality ?? 'N/A' }}<br>
-                                    <strong>District:</strong> {{ $roommate->profile->home ?? 'N/A' }}<br>
-                                    <strong>Bio:</strong> {{ $roommate->profile->bio ?? 'N/A' }}
-                                </p>
+                                <h5 class="card-title fw-bold">{{ $roommate->name }}</h5>
+
+                                           <!-- Display Student Image -->
+                                           @if ($roommate->studentimage)
+                                           <div class="mb-3">
+                                               <img src="{{ route('student.image', ['filename' => basename($roommate->studentimage)]) }}" alt="Student Image" class="img-thumbnail rounded-circle shadow-sm" width="100" height="100">
+                                           </div>
+                                       @else
+                                           <div class="mb-3">
+                                               <p>No student image available.</p>
+                                           </div>
+                                       @endif
+
+                                <ul class="list-unstyled mt-3">
+                                    <li><strong>Age:</strong> {{ $roommate->profile->age ?? 'N/A' }}</li>
+                                    <li><strong>State:</strong> {{ $roommate->profile->nationality ?? 'N/A' }}</li>
+                                    <li><strong>District:</strong> {{ $roommate->profile->home ?? 'N/A' }}</li>
+                                    <li><strong>Bio:</strong> {{ $roommate->profile->bio ?? 'N/A' }}</li>
+                                </ul>
                                 @if ($roommate->contact)
                                     <hr>
                                     <h6>Contact Information</h6>
-                                    <p class="card-text">
-                                        <strong>Phone Number:</strong>
-                                        @if ($roommate->contact->show_phone_number)
-                                            {{ $roommate->contact->phone_number ?? 'N/A' }}
-                                        @else
-                                            Hidden by user
-                                        @endif
-                                        <br>
-
-                                        <strong>WhatsApp:</strong>
-                                        @if ($roommate->contact->show_whatsapp)
-                                            {{ $roommate->contact->whatsapp ?? 'N/A' }}
-                                        @else
-                                            Hidden by user
-                                        @endif
-                                        <br>
-
-                                        <strong>Telegram:</strong>
-                                        @if ($roommate->contact->show_telegram)
-                                            {{ $roommate->contact->telegram ?? 'N/A' }}
-                                        @else
-                                            Hidden by user
-                                        @endif
-                                        <br>
-
-                                        <strong>Facebook Profile:</strong>
-                                        @if ($roommate->contact->show_facebook_profile)
-                                            @if ($roommate->contact->facebook_profile)
-                                                <a href="{{ $roommate->contact->facebook_profile }}" target="_blank">{{ $roommate->contact->facebook_profile }}</a>
-                                            @else
-                                                N/A
-                                            @endif
-                                        @else
-                                            Hidden by user
-                                        @endif
-                                        <br>
-
-                                        <strong>Twitter Profile:</strong>
-                                        @if ($roommate->contact->show_twitter_profile)
-                                            @if ($roommate->contact->twitter_profile)
-                                                <a href="{{ $roommate->contact->twitter_profile }}" target="_blank">{{ $roommate->contact->twitter_profile }}</a>
-                                            @else
-                                                N/A
-                                            @endif
-                                        @else
-                                            Hidden by user
-                                        @endif
-                                        <br>
-
-                                        <strong>Instagram Profile:</strong>
-                                        @if ($roommate->contact->show_instagram_profile)
-                                            @if ($roommate->contact->instagram_profile)
-                                                <a href="{{ $roommate->contact->instagram_profile }}" target="_blank">{{ $roommate->contact->instagram_profile }}</a>
-                                            @else
-                                                N/A
-                                            @endif
-                                        @else
-                                            Hidden by user
-                                        @endif
-                                    </p>
+                                    <ul class="list-unstyled">
+                                        <li><strong>Phone Number:</strong> {{ $roommate->contact->show_phone_number ? ($roommate->contact->phone_number ?? 'N/A') : 'Hidden by user' }}</li>
+                                        <li><strong>WhatsApp:</strong> {{ $roommate->contact->show_whatsapp ? ($roommate->contact->whatsapp ?? 'N/A') : 'Hidden by user' }}</li>
+                                        <li><strong>Telegram:</strong> {{ $roommate->contact->show_telegram ? ($roommate->contact->telegram ?? 'N/A') : 'Hidden by user' }}</li>
+                                        <li><strong>Facebook Profile:</strong> <a href="{{ $roommate->contact->facebook_profile }}" target="_blank">{{ $roommate->contact->facebook_profile ?? 'N/A' }}</a></li>
+                                        <li><strong>Twitter Profile:</strong> <a href="{{ $roommate->contact->twitter_profile }}" target="_blank">{{ $roommate->contact->twitter_profile ?? 'N/A' }}</a></li>
+                                        <li><strong>Instagram Profile:</strong> <a href="{{ $roommate->contact->instagram_profile }}" target="_blank">{{ $roommate->contact->instagram_profile ?? 'N/A' }}</a></li>
+                                    </ul>
                                 @endif
                             </div>
                             <div class="card-footer d-flex justify-content-between align-items-center">

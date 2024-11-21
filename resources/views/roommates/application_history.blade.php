@@ -1,32 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mt-5">
-    <h2>Your Roommate Applications</h2>
+<div class="container mt-5 text-center">
+    <h1 class="mb-4">Your Roommate Applications</h1>
 
     @if ($applications->isEmpty())
-        <p class="text-center mt-4">You have no roommate applications at this time.</p>
+        <div class="alert alert-info text-center">
+            <div class="mt-4 text-center">
+                <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="img-fluid" style="max-width: 150px;">
+            </div>
+            <p>You have no roommate applications at this time.</p>
+        </div>
     @else
-        <div class="row">
+        <div class="row g-4">
             @foreach ($applications as $application)
-                <div class="col-md-4 mb-4">
-                    <div class="card {{ strtolower($application->status) == 'accepted' ? 'bg-success text-white' : (strtolower($application->status) == 'reject' || strtolower($application->status) == 'rejected' ? 'bg-danger text-white' : '') }}">
+                <div class="col-lg-4 col-md-6">
+                    <div class="card shadow-sm border-0 {{ strtolower($application->status) == 'accepted' ? 'bg-success text-white' : (strtolower($application->status) == 'reject' || strtolower($application->status) == 'rejected' ? 'bg-danger text-white' : '') }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $application->roommate->name }}</h5>
-                            <p><strong>Student ID:</strong> {{ $application->roommate->studentid }}</p>
-                            <p><strong>Email:</strong> {{ $application->roommate->studentemail }}</p>
-                            <p><strong>College:</strong> {{ $application->roommate->studentcollege }}</p>
-                            <p><strong>Gender:</strong> {{ $application->roommate->studentgender }}</p>
-                            <p><strong>Status:</strong>
-                                <span>{{ ucfirst($application->status) }}</span>
-                            </p>
+                            <h5 class="card-title fw-bold">{{ $application->roommate->name }}</h5>
+                            <ul class="list-unstyled mt-3">
+                                <li><strong>Student ID:</strong> {{ $application->roommate->studentid }}</li>
+                                <li><strong>Email:</strong> {{ $application->roommate->studentemail }}</li>
+                                <li><strong>College:</strong> {{ $application->roommate->studentcollege }}</li>
+                                <li><strong>Gender:</strong> {{ $application->roommate->studentgender }}</li>
+                                <li><strong>Status:</strong> <span>{{ ucfirst($application->status) }}</span></li>
+                            </ul>
 
                             @if (strtolower($application->status) == 'reject' || strtolower($application->status) == 'rejected')
-                                <!-- Remove Button for Rejected Applications -->
-                                <form action="{{ route('applications.destroy', $application->id) }}" method="POST" class="mt-3">
+                                <form action="{{ route('applications.destroy', $application->id) }}" method="POST" class="mt-4">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Remove</button>
+                                    <button type="submit" class="btn btn-outline-light w-100">Remove</button>
                                 </form>
                             @endif
                         </div>

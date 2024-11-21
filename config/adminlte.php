@@ -120,7 +120,7 @@ return [
             'height' => 300,
         ],
     ],
-    
+
 
     /*
     |--------------------------------------------------------------------------
@@ -306,7 +306,7 @@ return [
     ['header' => 'Management'], // Sidebar header
     [
         'text' => 'Manage Students',
-        'url' => 'admin/students',
+        'url' => 'admin/students/index',
         'icon' => 'fas fa-user-graduate', // Icon for students
     ],
     [
@@ -321,12 +321,12 @@ return [
     ],
     [
         'text' => 'Manage Applications',
-        'url' => 'admin/applications',
+        'url' => 'admin/applications/table', // Matches the route
         'icon' => 'fas fa-file-alt', // Icon for applications
     ],
     [
         'text' => 'Manage User Contacts',
-        'url' => 'admin/user-contacts',
+        'url' => 'admin/usercontacts',
         'icon' => 'fas fa-envelope', // Icon for user contacts
     ],
 ],

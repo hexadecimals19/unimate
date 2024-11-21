@@ -113,3 +113,35 @@ Route::get('/districts-by-state/{stateName}', function($stateName) {
 Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
+
+
+
+
+
+
+use App\Http\Controllers\UserController;
+
+// Remove this line because it causes conflict and doesn't pass the $users variable correctly
+// Route::get('/admin/students/index', function () {
+//     return view('admin.students.index'); // This will load the index.blade.php file
+// })->name('admin.students.index');
+
+// Keep this route to use the UserController, which correctly retrieves users
+Route::get('/admin/students/index', [UserController::class, 'index'])->name('admin.students.index');
+
+// Other user management routes
+Route::get('/admin/students', [UserController::class, 'index'])->name('admin.students.index');
+Route::get('/admin/students/{id}', [UserController::class, 'show'])->name('admin.students.show');
+
+// Route to display the edit form
+Route::get('/admin/students/{id}/edit', [UserController::class, 'edit'])->name('admin.students.edit');
+
+// Route to handle the update (PUT request)
+Route::put('/admin/students/{id}', [UserController::class, 'update'])->name('admin.students.update');
+
+Route::delete('/admin/students/{id}', [UserController::class, 'destroy'])->name('admin.students.destroy');
+
+
+
+
+
