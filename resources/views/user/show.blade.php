@@ -84,22 +84,33 @@
                 <p class="text-muted">No profile information available.</p>
             @endif
 
-            <!-- Reviews and Ratings Section -->
-            <hr class="my-5">
-            <h4 class="fw-bold mb-3">Reviews and Ratings</h4>
-            @if ($student->reviewsReceived->isNotEmpty())
-                @foreach ($student->reviewsReceived as $review)
-                    <div class="mb-4">
-                        <div class="card border-0 bg-light shadow-sm p-3">
-                            <strong>Rating:</strong> <span class="badge bg-primary">{{ $review->rating }} / 5</span><br>
-                            <strong>Review:</strong> {{ $review->review ?? 'No review provided' }}<br>
-                            <small class="text-muted">Reviewed by: {{ $review->user->name }} on {{ $review->created_at->format('Y-m-d') }}</small>
+<!-- Reviews and Ratings Section -->
+<hr class="my-5">
+<h4 class="fw-bold mb-3">Reviews and Ratings</h4>
+@if ($student->reviewsReceived->isNotEmpty())
+    @foreach ($student->reviewsReceived as $review)
+        <div class="mb-4">
+            <div class="card border-0 bg-light shadow-sm p-3">
+                <!-- Rating Progress Bar -->
+                <div class="mb-3">
+                    <strong>Rating:</strong>
+                    <div class="progress" style="height: 20px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ ($review->rating / 5) * 100 }}%;" aria-valuenow="{{ $review->rating }}" aria-valuemin="0" aria-valuemax="5">
+                            {{ $review->rating }} / 5
                         </div>
                     </div>
-                @endforeach
-            @else
-                <p class="text-muted">No reviews available.</p>
-            @endif
+                </div>
+
+                <!-- Review Content -->
+                <strong>Review:</strong> {{ $review->review ?? 'No review provided' }}<br>
+                <small class="text-muted">Reviewed by: {{ $review->user->name }} on {{ $review->created_at->format('Y-m-d') }}</small>
+            </div>
+        </div>
+    @endforeach
+@else
+    <p class="text-muted">No reviews available.</p>
+@endif
+
 
             <!-- Submit Roommate Request Button -->
             <div class="text-center mt-5">
