@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\RoommateController;
 use App\Http\Controllers\ReviewController;
-
+use App\Http\Controllers\AdminController;
+use App\Http\Middleware\CheckRole;
 
 Route::get('/', function () {
     return view('welcome');
@@ -107,3 +109,7 @@ Route::get('/districts-by-state/{stateName}', function($stateName) {
 });
 
 
+// Admin Routes
+Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});

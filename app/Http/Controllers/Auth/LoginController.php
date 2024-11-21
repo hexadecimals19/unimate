@@ -50,6 +50,18 @@ class LoginController extends Controller
         return 'studentemail';  // Use 'studentemail' instead of 'email'
     }
 
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->role === 'admin') {
+            // Redirect to the admin dashboard if the user is an admin
+            return redirect()->route('admin.dashboard');
+        }
+
+        // Redirect normal users to the home route
+        return redirect()->route('home');
+    }
+
+
     protected function credentials(Request $request)
 {
     return [
