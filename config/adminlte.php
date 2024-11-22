@@ -311,7 +311,7 @@ return [
     ],
     [
         'text' => 'Manage Colleges',
-        'url' => 'admin/colleges',
+        'url' => 'admin/colleges/index',
         'icon' => 'fas fa-university', // Icon for colleges
     ],
     [

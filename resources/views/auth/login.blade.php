@@ -45,15 +45,16 @@
     </header>
 
     <!-- Main Content -->
-    <div class="min-h-screen flex flex-col items-center justify-center">
+    <div class="min-h-screen flex items-center justify-center px-4 lg:px-0">
         <!-- Card Section -->
-        <div class="card w-full max-w-md bg-white dark:bg-white shadow-md rounded-lg p-6">
-            <div class="card-header text-center mb-4">
-                <h2 class="text-2xl font-semibold text-[#211d70]">{{ __('Student Login') }}</h2>
+        <div class="card w-full max-w-md bg-white shadow-xl rounded-xl p-8 transform transition hover:scale-105 duration-300 ease-in-out">
+            <!-- Card Header -->
+            <div class="card-header text-center mb-6">
+                <h2 class="text-3xl font-bold text-[#211d70]">{{ __('Student Login') }}</h2>
             </div>
 
             <!-- Logo Section -->
-            <div class="mb-4 text-center">
+            <div class="mb-6 text-center">
                 <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="img-fluid mx-auto" style="max-width: 100px;">
             </div>
 
@@ -62,54 +63,60 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    <div class="mb-4">
-                        <label for="studentemail" class="block text-sm font-medium text-gray-700 dark:text-gray-700">{{ __('Student Email Address') }}</label>
-                        <input id="studentemail" type="email" class="form-control mt-1 block w-full rounded-md border-gray-300 dark:bg-gray-200 dark:border-gray-300 text-black @error('studentemail') is-invalid @enderror" name="studentemail" value="{{ old('studentemail') }}" required autocomplete="studentemail" autofocus>
+                    <!-- Email Field -->
+                    <div class="mb-5">
+                        <label for="studentemail" class="block text-sm font-semibold text-gray-700 dark:text-gray-700 mb-2">{{ __('Student Email Address') }}</label>
+                        <input id="studentemail" type="email" class="form-control w-full px-4 py-3 rounded-lg border-gray-300 dark:bg-gray-100 dark:border-gray-300 text-black @error('studentemail') is-invalid @enderror" name="studentemail" value="{{ old('studentemail') }}" required autocomplete="studentemail" autofocus>
 
                         @error('studentemail')
-                            <span class="invalid-feedback text-red-500 text-sm" role="alert">
+                            <span class="invalid-feedback text-red-500 text-sm mt-1" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
 
-                    <div class="mb-4">
-                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-700">{{ __('Password') }}</label>
-                        <input id="password" type="password" class="form-control mt-1 block w-full rounded-md border-gray-300 dark:bg-gray-200 dark:border-gray-300 text-black @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <!-- Password Field -->
+                    <div class="mb-5">
+                        <label for="password" class="block text-sm font-semibold text-gray-700 dark:text-gray-700 mb-2">{{ __('Password') }}</label>
+                        <input id="password" type="password" class="form-control w-full px-4 py-3 rounded-lg border-gray-300 dark:bg-gray-100 dark:border-gray-300 text-black @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                         @error('password')
-                            <span class="invalid-feedback text-red-500 text-sm" role="alert">
+                            <span class="invalid-feedback text-red-500 text-sm mt-1" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
 
-                    <div class="mb-4 flex items-center">
+                    <!-- Remember Me Checkbox -->
+                    <div class="mb-5 flex items-center">
                         <input class="form-check-input mr-2" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                         <label class="form-check-label text-sm text-gray-700 dark:text-gray-700" for="remember">
                             {{ __('Remember Me') }}
                         </label>
                     </div>
 
+                    <!-- Submit Button & Forgot Password Link -->
                     <div class="flex items-center justify-between">
-                        <button type="submit" class="px-4 py-2 bg-[#211d70] text-white rounded-md transition hover:bg-[#4DB1E2]">
+                        <button type="submit" class="px-6 py-3 w-full bg-[#211d70] text-white rounded-md transition transform hover:scale-105 duration-300 hover:bg-[#4DB1E2] font-semibold">
                             {{ __('Login') }}
                         </button>
+                    </div>
 
-                        @if (Route::has('password.request'))
+                    @if (Route::has('password.request'))
+                        <div class="mt-4 text-center">
                             <a class="text-sm text-[#211d70] hover:underline" href="{{ route('password.request') }}">
                                 {{ __('Forgot Your Password?') }}
                             </a>
-                        @endif
-                    </div>
+                        </div>
+                    @endif
                 </form>
             </div>
         </div>
     </div>
 
-       <!-- Footer Section -->
-       <footer class="bg-white dark:bg-white w-full shadow-md mt-8">
-        <div class="container mx-auto px-2 py-8 flex justify-between items-start">
+    <!-- Footer Section -->
+    <footer class="bg-white dark:bg-white w-full shadow-md mt-8">
+        <div class="container mx-auto px-6 py-8 flex justify-between items-start">
             <!-- Resources, Help, Company Columns -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Resources Column -->

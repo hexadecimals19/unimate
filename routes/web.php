@@ -118,19 +118,14 @@ Route::middleware(['auth', CheckRole::class . ':admin'])->group(function () {
 
 
 
-
 use App\Http\Controllers\UserController;
 
-// Remove this line because it causes conflict and doesn't pass the $users variable correctly
-// Route::get('/admin/students/index', function () {
-//     return view('admin.students.index'); // This will load the index.blade.php file
-// })->name('admin.students.index');
 
-// Keep this route to use the UserController, which correctly retrieves users
 Route::get('/admin/students/index', [UserController::class, 'index'])->name('admin.students.index');
 
 // Other user management routes
 Route::get('/admin/students', [UserController::class, 'index'])->name('admin.students.index');
+
 Route::get('/admin/students/{id}', [UserController::class, 'show'])->name('admin.students.show');
 
 // Route to display the edit form
@@ -141,7 +136,31 @@ Route::put('/admin/students/{id}', [UserController::class, 'update'])->name('adm
 
 Route::delete('/admin/students/{id}', [UserController::class, 'destroy'])->name('admin.students.destroy');
 
+use App\Http\Controllers\AdminCollegeController;
 
 
+    // List all colleges
+    Route::get('admin/colleges/index', [AdminCollegeController::class, 'index'])->name('admin.colleges.index'); // GET /admin/colleges
+
+    // Create a new college (show form)
+    Route::get('admin/colleges/create', [AdminCollegeController::class, 'create'])->name('admin.colleges.create'); // GET /admin/colleges/create
+
+    // Store the new college
+    Route::post('admin/colleges/store', [AdminCollegeController::class, 'store'])->name('admin.colleges.store'); // POST /admin/colleges
+
+    // Show a specific college
+    Route::get('admin/colleges/{id}', [AdminCollegeController::class, 'show'])->name('admin.colleges.show'); // GET /admin/colleges/{id}
+
+    // Show the edit form for a specific college
+    Route::get('admin/colleges/{id}/edit', [AdminCollegeController::class, 'edit'])->name('admin.colleges.edit'); // GET /admin/colleges/{id}/edit
+
+    // Handle the update for a specific college
+    Route::put('admin/colleges/{id}', [AdminCollegeController::class, 'update'])->name('admin.colleges.update'); // PUT /admin/colleges/{id}
+
+    // Handle deleting a specific college
+    Route::delete('admin/colleges/{id}', [AdminCollegeController::class, 'destroy'])->name('admin.colleges.destroy'); // DELETE /admin/colleges/{id}
+
+
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
 

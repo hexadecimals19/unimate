@@ -8,14 +8,44 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Retrieve all users (or filter students only)
-        $users = User::where('role', 'user')->get();
+        // Fetch all colleges for the dropdown
+        $colleges = College::all();
 
-        // Pass users to the view
-        return view('admin.students.index', compact('users'));
+        // Start with a base query
+        $query = User::where('role', 'user');
+
+        // Apply filters if available
+        if ($request->filled('name')) {
+            $query->where('name', 'LIKE', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->filled('email')) {
+            $query->where('studentemail', 'LIKE', '%' . $request->input('email') . '%');
+        }
+
+        if ($request->filled('studentid')) {
+            $query->where('studentid', 'LIKE', '%' . $request->input('studentid') . '%');
+        }
+
+        if ($request->filled('college')) {
+            $query->where('studentcollege', $request->input('college'));
+        }
+
+        if ($request->filled('gender')) {
+            $query->where('studentgender', $request->input('gender'));
+        }
+
+        // Get the filtered user list
+        $users = $query->get();
+
+        // Return view with users and colleges
+        return view('admin.students.index', compact('users', 'colleges'));
     }
+
+
+
 
     public function show($id)
     {
