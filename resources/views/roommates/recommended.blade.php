@@ -11,7 +11,9 @@
     @else
     <div class="row g-4">
         @foreach($recommendedRoommates as $roommate)
-            @if ($roommate['user']->studentgender == auth()->user()->studentgender && $roommate['score'] > 0)
+            @if ($roommate['user']->studentgender == auth()->user()->studentgender
+            && $roommate['user']->studentcollege == auth()->user()->studentcollege
+            && $roommate['score'] > 0)
                 <div class="col-lg-4 col-md-6 d-flex">
                     <div class="card border-0 shadow-sm rounded-4 w-100">
                         <div class="card-body p-4 text-center d-flex flex-column">
