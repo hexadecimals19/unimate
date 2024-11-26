@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\College;
+use App\Models\Review;
+use App\Models\RoommateApplication;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -18,8 +20,13 @@ class AdminController extends Controller
         $totalFemaleStudents = User::where('role', 'user')->where('studentgender', 'female')->count();
         $totalColleges = College::count();
 
+        // Additional counts
+        $totalReviews = Review::count(); // Assuming you have a Review model
+        $totalRoommateApplications = RoommateApplication::count(); // Assuming you have a RoommateApplication model
+
         // Pass these variables to the view
-        return view('admin.dashboard', compact('user', 'totalStudents', 'totalMaleStudents', 'totalFemaleStudents', 'totalColleges'));
+        return view('admin.dashboard', compact('user', 'totalStudents', 'totalMaleStudents', 'totalFemaleStudents', 'totalColleges', 'totalReviews', 'totalRoommateApplications'));
     }
+
 
 }

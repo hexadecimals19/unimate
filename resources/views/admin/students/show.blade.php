@@ -3,7 +3,11 @@
 @section('title', 'View User')
 
 @section('content_header')
-    <h1>View User Details</h1>
+<div class="text-center my-4">
+    <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="img-fluid" style="max-width: 150px;">
+    <h2 class="mt-3 text-dark fw-bold">Unimate Admin System</h2>
+    <h1 class="mt-2 text-dark fw-bold">View Student Details</h1>
+</div>
 @endsection
 
 @section('content')

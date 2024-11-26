@@ -3,7 +3,11 @@
 @section('title', 'Admin Dashboard')
 
 @section('content_header')
-    <h1 class="text-center mb-4">Admin Dashboard</h1>
+<div class="text-center my-4">
+    <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="img-fluid" style="max-width: 150px;">
+    <h2 class="mt-3">Unimate Admin System</h2>
+    <h1 class="mt-2">Dashboard</h1>
+</div>
 @endsection
 
 @section('content')
@@ -22,63 +26,89 @@
                 </div>
             </div>
 
- <!-- Total Students Card -->
- <div class="col-lg-4">
-    <div class="card bg-success text-white shadow-lg border-0 rounded-5">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title mb-0">Total Students Registered</h3>
-            <span><i class="fas fa-users fa-2x"></i></span>
-        </div>
-        <div class="card-body d-flex align-items-center justify-content-between">
-            <p class="display-4 mb-0">{{ $totalStudents }}</p>
-            <a href="{{ route('admin.students.index') }}" class="btn btn-light fw-bold">View Students</a>
-        </div>
-    </div>
-</div>
+            <!-- Total Students Card -->
+            <div class="col-lg-4">
+                <div class="card bg-success text-white shadow-lg border-0 rounded-5">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">Total Students Registered</h3>
+                        <span><i class="fas fa-users fa-2x"></i></span>
+                    </div>
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <p class="display-4 mb-0">{{ $totalStudents }}</p>
+                        <a href="{{ route('admin.students.index') }}" class="btn btn-light fw-bold">View Students</a>
+                    </div>
+                </div>
+            </div>
 
-<!-- Total Male Students Card -->
-<div class="col-lg-4">
-    <div class="card bg-primary text-white shadow-lg border-0 rounded-5">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title mb-0">Total Male Students</h3>
-            <span><i class="fas fa-male fa-2x"></i></span>
-        </div>
-        <div class="card-body d-flex align-items-center justify-content-between">
-            <p class="display-4 mb-0">{{ $totalMaleStudents }}</p>
-            <a href="{{ route('admin.students.index', ['gender' => 'male']) }}" class="btn btn-light fw-bold">View Male Students</a>
-        </div>
-    </div>
-</div>
+            <!-- Total Male Students Card -->
+            <div class="col-lg-4">
+                <div class="card bg-primary text-white shadow-lg border-0 rounded-5">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">Total Male Students</h3>
+                        <span><i class="fas fa-male fa-2x"></i></span>
+                    </div>
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <p class="display-4 mb-0">{{ $totalMaleStudents }}</p>
+                        <a href="{{ route('admin.students.index', ['gender' => 'male']) }}" class="btn btn-light fw-bold">View Male Students</a>
+                    </div>
+                </div>
+            </div>
 
-<!-- Total Female Students Card -->
-<div class="col-lg-4">
-    <div class="card bg-pink text-white shadow-lg border-0 rounded-5">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title mb-0">Total Female Students</h3>
-            <span><i class="fas fa-female fa-2x"></i></span>
-        </div>
-        <div class="card-body d-flex align-items-center justify-content-between">
-            <p class="display-4 mb-0">{{ $totalFemaleStudents }}</p>
-            <a href="{{ route('admin.students.index', ['gender' => 'female']) }}" class="btn btn-light fw-bold">View Female Students</a>
-        </div>
-    </div>
-</div>
+            <!-- Total Female Students Card -->
+            <div class="col-lg-4">
+                <div class="card bg-pink text-white shadow-lg border-0 rounded-5">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">Total Female Students</h3>
+                        <span><i class="fas fa-female fa-2x"></i></span>
+                    </div>
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <p class="display-4 mb-0">{{ $totalFemaleStudents }}</p>
+                        <a href="{{ route('admin.students.index', ['gender' => 'female']) }}" class="btn btn-light fw-bold">View Female Students</a>
+                    </div>
+                </div>
+            </div>
 
-<!-- Total Colleges Card -->
-<div class="col-lg-6">
-    <div class="card bg-info text-white shadow-lg border-0 rounded-5">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h3 class="card-title mb-0">Total Colleges Registered</h3>
-            <span><i class="fas fa-university fa-2x"></i></span>
-        </div>
-        <div class="card-body d-flex align-items-center justify-content-between">
-            <p class="display-4 mb-0">{{ $totalColleges }}</p>
-            <a href="{{ route('admin.colleges.index') }}" class="btn btn-light fw-bold">View Colleges</a>
-        </div>
-    </div>
-</div>
+            <!-- Total Colleges Card -->
+            <div class="col-lg-6">
+                <div class="card bg-info text-white shadow-lg border-0 rounded-5">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">Total Colleges Registered</h3>
+                        <span><i class="fas fa-university fa-2x"></i></span>
+                    </div>
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <p class="display-4 mb-0">{{ $totalColleges }}</p>
+                        <a href="{{ route('admin.colleges.index') }}" class="btn btn-light fw-bold">View Colleges</a>
+                    </div>
+                </div>
+            </div>
 
-          
+            <!-- Total Reviews Card -->
+            <div class="col-lg-6">
+                <div class="card bg-warning text-white shadow-lg border-0 rounded-5">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">Total Reviews Made</h3>
+                        <span><i class="fas fa-star fa-2x"></i></span>
+                    </div>
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <p class="display-4 mb-0">{{ $totalReviews }}</p>
+                        <a href="{{ route('admin.reviews.index') }}" class="btn btn-light fw-bold">View Reviews</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Roommate Applications Card -->
+            <div class="col-lg-6">
+                <div class="card bg-danger text-white shadow-lg border-0 rounded-5">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h3 class="card-title mb-0">Total Roommate Applications Made</h3>
+                        <span><i class="fas fa-home fa-2x"></i></span>
+                    </div>
+                    <div class="card-body d-flex align-items-center justify-content-between">
+                        <p class="display-4 mb-0">{{ $totalRoommateApplications }}</p>
+                        <a href="{{ route('admin.applications.index') }}" class="btn btn-light fw-bold">View Applications</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
