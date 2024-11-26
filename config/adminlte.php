@@ -321,12 +321,12 @@ return [
     ],
     [
         'text' => 'Manage Applications',
-        'url' => 'admin/applications/table', // Matches the route
+        'url' => 'admin/applications/index', // Matches the route
         'icon' => 'fas fa-file-alt', // Icon for applications
     ],
     [
         'text' => 'Manage User Contacts',
-        'url' => 'admin/usercontacts',
+        'url' => 'admin/usercontacts/index',
         'icon' => 'fas fa-envelope', // Icon for user contacts
     ],
 ],

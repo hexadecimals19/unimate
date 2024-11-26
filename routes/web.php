@@ -173,3 +173,9 @@ use App\Http\Controllers\AdminCollegeController;
     // Handle deleting a specific college
     Route::delete('admin/reviews/{id}', [AdminReviewController::class, 'destroy'])->name('admin.reviews.destroy'); // DELETE /admin/colleges/{id}
 
+
+    use App\Http\Controllers\AdminApplicationController;
+
+    Route::get('admin/applications/index', [AdminApplicationController::class, 'index'])->name('admin.applications.index');
+    Route::get('admin/applications/{id}', [AdminApplicationController::class, 'show'])->name('admin.applications.show');
+    Route::delete('admin/applications/{id}', [AdminApplicationController::class, 'destroy'])->name('admin.applications.destroy');
