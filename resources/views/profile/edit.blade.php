@@ -57,12 +57,15 @@
                             <label for="studentcollege">Student College:</label>
                             <select name="studentcollege" id="studentcollege" class="form-control" required>
                                 @foreach($colleges as $college)
-                                    <option value="{{ $college->collegename }}" {{ old('studentcollege', $user->studentcollege) == $college->collegename ? 'selected' : '' }}>
-                                        {{ $college->collegename }}
-                                    </option>
+                                    @if(($user->studentgender == 'male' && $college->collegetype == 1) || ($user->studentgender == 'female' && $college->collegetype == 2))
+                                        <option value="{{ $college->collegename }}" {{ old('studentcollege', $user->studentcollege) == $college->collegename ? 'selected' : '' }}>
+                                            {{ $college->collegename }}
+                                        </option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
+
 
                         <div class="form-group">
                             <br>
