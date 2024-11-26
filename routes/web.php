@@ -179,3 +179,10 @@ use App\Http\Controllers\AdminCollegeController;
     Route::get('admin/applications/index', [AdminApplicationController::class, 'index'])->name('admin.applications.index');
     Route::get('admin/applications/{id}', [AdminApplicationController::class, 'show'])->name('admin.applications.show');
     Route::delete('admin/applications/{id}', [AdminApplicationController::class, 'destroy'])->name('admin.applications.destroy');
+
+
+    use App\Http\Controllers\AdminUserContactController;
+
+    Route::get('admin/usercontacts/index', [AdminUserContactController::class, 'index'])->name('admin.usercontacts.index');
+    Route::get('admin/usercontacts/{id}', [AdminUserContactController::class, 'show'])->name('admin.usercontacts.show');
+    Route::delete('admin/usercontacts/{id}', [AdminUserContactController::class, 'destroy'])->name('admin.usercontacts.destroy');
