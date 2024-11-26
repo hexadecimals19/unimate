@@ -163,4 +163,13 @@ use App\Http\Controllers\AdminCollegeController;
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
+    use App\Http\Controllers\AdminReviewController;
+
+    Route::get('admin/reviews/index', [AdminReviewController::class, 'index'])->name('admin.reviews.index'); // GET /admin/reviews
+
+    // Show a specific reviews
+    Route::get('admin/reviews/{id}', [AdminReviewController::class, 'show'])->name('admin.reviews.show'); // GET /admin/colleges/{id}
+
+    // Handle deleting a specific college
+    Route::delete('admin/reviews/{id}', [AdminReviewController::class, 'destroy'])->name('admin.reviews.destroy'); // DELETE /admin/colleges/{id}
 

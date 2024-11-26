@@ -316,7 +316,7 @@ return [
     ],
     [
         'text' => 'Manage Reviews',
-        'url' => 'admin/reviews',
+        'url' => 'admin/reviews/index',
         'icon' => 'fas fa-star', // Icon for reviews
     ],
     [
