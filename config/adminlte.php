@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Unimate </b>Admin Sytem',
+    'logo' => 'Unimate <b>Admin System</b>',
     'logo_img' => 'images\unimatelogo.png',
     'logo_img_class' => 'brand-image img-square elevation-3',
     'logo_img_xl' => null,

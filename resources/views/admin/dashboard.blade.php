@@ -7,6 +7,9 @@
     <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="img-fluid" style="max-width: 150px;">
     <h2 class="mt-3">Unimate Admin System</h2>
     <h1 class="mt-2">Dashboard</h1>
+
+    <!-- Date and Time in Malaysia -->
+    <p id="malaysia-time" class="mt-3 lead text-black"></p>
 </div>
 @endsection
 
@@ -15,13 +18,15 @@
         <div class="row g-4">
             <!-- Welcome Card -->
             <div class="col-lg-12">
-                <div class="card shadow-lg border-0 rounded-5">
-                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-0">Welcome, Admin!</h3>
-                        <span><i class="fas fa-user-shield fa-2x"></i></span>
+                <div class="card shadow-lg border-0 rounded-4 bg-gradient">
+                    <div class="card-header text-center bg-primary text-white rounded-top">
+                        <!-- Centered Icon -->
+                        <span class="d-block mb-3">
+                            <i class="fas fa-user-shield fa-3x"></i>
+                        </span>
                     </div>
-                    <div class="card-body">
-                        <p class="lead">This is your admin dashboard</p>
+                    <div class="card-body d-flex justify-content-center align-items-center text-center">
+                        <p class="lead text-white mb-0">Welcome to the Unimate Admin System</p>
                     </div>
                 </div>
             </div>
@@ -86,11 +91,13 @@
             <div class="col-lg-6">
                 <div class="card bg-warning text-white shadow-lg border-0 rounded-5">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h3 class="card-title mb-0">Total Reviews Made</h3>
-                        <span><i class="fas fa-star fa-2x"></i></span>
+                        <h3 class="card-title mb-0 text-white">Total Reviews Made</h3>
+                        <span class="text-white">
+                            <i class="fas fa-star fa-2x"></i>
+                        </span>
                     </div>
                     <div class="card-body d-flex align-items-center justify-content-between">
-                        <p class="display-4 mb-0">{{ $totalReviews }}</p>
+                        <p class="display-4 mb-0 text-white">{{ $totalReviews }}</p>
                         <a href="{{ route('admin.reviews.index') }}" class="btn btn-light fw-bold">View Reviews</a>
                     </div>
                 </div>
@@ -130,39 +137,61 @@
 @section('css')
     <style>
         .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .main-sidebar {
-            height: 100vh; /* Full viewport height */
-            overflow-y: auto; /* Allow scrolling if content overflows */
-            background-color: #dff6ff; /* Light blue background */
-            color: #000000; /* Black text */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
-
-        .main-sidebar .nav-sidebar .nav-item .nav-link {
-            color: #0056b3; /* Link color */
+        .card-header {
+            background: linear-gradient(to right, #4e73df, #224abe);
+            border-radius: 10px 10px 0 0;
         }
-
-        .main-sidebar .nav-sidebar .nav-item .nav-link:hover {
-            background-color: #b3e0ff; /* Hover effect */
-            color: #000000; /* Hover text color */
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
         }
-
-        .main-sidebar .brand-link {
-            height: 60px; /* Adjust height for logo section */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            background-color: #b3e0ff; /* Dark blue */
-            color: #0056b3; /* Link color */
+        .icon-container i {
+            color: #fff;
+        }
+        .lead {
+            font-size: 1.25rem;
+            color: #6c757d;
+        }
+        .bg-gradient {
+            background: linear-gradient(135deg, #6c5ce7, #00b894);
+            border-radius: 12px;
         }
     </style>
 @endsection
 
 @section('js')
     <script>
-        console.log('Admin Dashboard Loaded!');
+        // JavaScript to show the current date and time in Malaysia Time (GMT+8)
+        function updateMalaysiaTime() {
+            // Create a new date object for Malaysia time (GMT+8)
+            var options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            };
+
+            // Get the current time in Malaysia time zone (GMT+8)
+            var malaysiaTime = new Date().toLocaleString("en-US", { timeZone: "Asia/Kuala_Lumpur", ...options });
+
+            // Display the date and time in the #malaysia-time element
+            document.getElementById("malaysia-time").innerText = malaysiaTime;
+        }
+
+        // Update the time every second
+        setInterval(updateMalaysiaTime, 1000);
+
+        // Initialize the time when the page loads
+        updateMalaysiaTime();
     </script>
 @endsection
