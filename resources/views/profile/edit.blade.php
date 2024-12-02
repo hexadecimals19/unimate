@@ -359,27 +359,35 @@
                         <hr>
                         <div class="form-check mb-3">
                             <input type="hidden" name="show_nationality" value="0">
-                            <input type="checkbox" name="show_nationality" value="1" class="form-check-input" id="showNationality" {{ old('show_nationality', $user->profile->show_nationality) ? 'checked' : '' }}>
+                            <input type="checkbox" name="show_nationality" value="1" class="form-check-input" id="showNationality"
+                                {{ old('show_nationality', $user->profile ? $user->profile->show_nationality : 0) ? 'checked' : '' }}>
                             <label class="form-check-label" for="showNationality">Show Your State</label>
                         </div>
 
+
                         <div class="form-check mb-3">
                             <input type="hidden" name="show_home" value="0">
-                            <input type="checkbox" name="show_home" value="1" class="form-check-input" id="showHome" {{ old('show_home', $user->profile->show_home) ? 'checked' : '' }}>
+                            <input type="checkbox" name="show_home" value="1" class="form-check-input" id="showHome"
+                                {{ old('show_home', $user->profile ? $user->profile->show_home : 0) ? 'checked' : '' }}>
                             <label class="form-check-label" for="showHome">Show Your District or Area</label>
                         </div>
 
+
                         <div class="form-check mb-3">
                             <input type="hidden" name="show_age" value="0">
-                            <input type="checkbox" name="show_age" value="1" class="form-check-input" id="showAge" {{ old('show_age', $user->profile->show_age) ? 'checked' : '' }}>
+                            <input type="checkbox" name="show_age" value="1" class="form-check-input" id="showAge"
+                                {{ old('show_age', $user->profile ? $user->profile->show_age : 0) ? 'checked' : '' }}>
                             <label class="form-check-label" for="showAge">Show Your Age</label>
                         </div>
 
+
                         <div class="form-check mb-3">
                             <input type="hidden" name="show_date_of_birth" value="0">
-                            <input type="checkbox" name="show_date_of_birth" value="1" class="form-check-input" id="showDateOfBirth" {{ old('show_date_of_birth', $user->profile->show_date_of_birth) ? 'checked' : '' }}>
+                            <input type="checkbox" name="show_date_of_birth" value="1" class="form-check-input" id="showDateOfBirth"
+                                {{ old('show_date_of_birth', $user->profile ? $user->profile->show_date_of_birth : 0) ? 'checked' : '' }}>
                             <label class="form-check-label" for="showDateOfBirth">Show Your Date of Birth</label>
                         </div>
+
                     </div>
                 </div>
 

@@ -25,9 +25,13 @@
                     <div class="card border-0 shadow-sm rounded-4 text-center">
                         <div class="card-body">
                             <h5 class="card-title mb-3 text-primary fw-bold"><i class="fas fa-user"></i> Applicant</h5>
-                            <img src="{{ route('student.image', ['filename' => basename($application->applicant->studentimage)]) }}"
-                                 alt="Applicant Image" class="img-thumbnail rounded-circle mb-3" width="150">
-                            <p class="card-text fw-bold text-dark" style="font-size: 1.2rem;">{{ $application->applicant->name }}</p>
+                            @if ($application->applicant && $application->applicant->studentimage)
+                                <img src="{{ route('student.image', ['filename' => basename($application->applicant->studentimage)]) }}"
+                                     alt="Applicant Image" class="img-thumbnail rounded-circle mb-3" width="150">
+                            @else
+                                <img src="{{ asset('images/defaultProfile.png') }}" alt="Default Image" class="img-thumbnail rounded-circle mb-3" width="150">
+                            @endif
+                            <p class="card-text fw-bold text-dark" style="font-size: 1.2rem;">{{ $application->applicant ? $application->applicant->name : 'Deleted User' }}</p>
                         </div>
                     </div>
                 </div>
@@ -37,9 +41,13 @@
                     <div class="card border-0 shadow-sm rounded-4 text-center">
                         <div class="card-body">
                             <h5 class="card-title mb-3 text-success fw-bold"><i class="fas fa-user-friends"></i> Roommate</h5>
-                            <img src="{{ route('student.image', ['filename' => basename($application->roommate->studentimage)]) }}"
-                                 alt="Roommate Image" class="img-thumbnail rounded-circle mb-3" width="150">
-                            <p class="card-text fw-bold text-dark" style="font-size: 1.2rem;">{{ $application->roommate->name }}</p>
+                            @if ($application->roommate && $application->roommate->studentimage)
+                                <img src="{{ route('student.image', ['filename' => basename($application->roommate->studentimage)]) }}"
+                                     alt="Roommate Image" class="img-thumbnail rounded-circle mb-3" width="150">
+                            @else
+                                <img src="{{ asset('images/defaultProfile.png') }}" alt="Default Image" class="img-thumbnail rounded-circle mb-3" width="150">
+                            @endif
+                            <p class="card-text fw-bold text-dark" style="font-size: 1.2rem;">{{ $application->roommate ? $application->roommate->name : 'Deleted User' }}</p>
                         </div>
                     </div>
                 </div>
@@ -65,8 +73,8 @@
                 </div>
             </div>
 
-            <!-- Back Button -->
-            <div class="mt-4 text-center">
+            <!-- Back Button Section -->
+            <div class="mt-5 text-center">
                 <a href="{{ route('admin.applications.index') }}" class="btn btn-primary btn-lg rounded-pill shadow-sm">
                     <i class="fas fa-arrow-left"></i> Back to Applications List
                 </a>
@@ -74,6 +82,7 @@
         </div>
     </div>
 @endsection
+
 
 @section('css')
     <style>

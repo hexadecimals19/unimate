@@ -18,27 +18,30 @@
                         $roommate = $roommateApplication->applicant_id == Auth::id()
                                     ? $roommateApplication->roommate
                                     : $roommateApplication->applicant;
-                        $existingReview = \App\Models\Review::where('user_id', Auth::id())
-                                                            ->where('roommate_id', $roommate->id)
-                                                            ->first();
-                    @endphp
 
+                        // Make sure $roommate is not null before accessing its properties
+                        if ($roommate) {
+                            $existingReview = \App\Models\Review::where('user_id', Auth::id())
+                                                                ->where('roommate_id', $roommate->id)
+                                                                ->first();
+                        }
+                    @endphp
 
                     <div class="col-lg-4 col-md-6">
                         <div class="card h-100 shadow-sm border-0">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold">{{ $roommate->name }}</h5>
+                                <h5 class="card-title fw-bold">{{ $roommate->name ?? 'Deleted User' }}</h5>
 
-                                           <!-- Display Student Image -->
-                                           @if ($roommate->studentimage)
-                                           <div class="mb-3">
-                                               <img src="{{ route('student.image', ['filename' => basename($roommate->studentimage)]) }}" alt="Student Image" class="img-thumbnail rounded-circle shadow-sm" width="100" height="100">
-                                           </div>
-                                       @else
-                                           <div class="mb-3">
-                                               <p>No student image available.</p>
-                                           </div>
-                                       @endif
+                                <!-- Display Student Image -->
+                                @if ($roommate && $roommate->studentimage)
+                                    <div class="mb-3">
+                                        <img src="{{ route('student.image', ['filename' => basename($roommate->studentimage)]) }}" alt="Student Image" class="img-thumbnail rounded-circle shadow-sm" width="100" height="100">
+                                    </div>
+                                @else
+                                    <div class="mb-3">
+                                        <p>No student image available.</p>
+                                    </div>
+                                @endif
 
                                 <ul class="list-unstyled mt-3">
                                     <li><strong>Age:</strong> {{ $roommate->profile->age ?? 'N/A' }}</li>
@@ -46,7 +49,8 @@
                                     <li><strong>District:</strong> {{ $roommate->profile->home ?? 'N/A' }}</li>
                                     <li><strong>Bio:</strong> {{ $roommate->profile->bio ?? 'N/A' }}</li>
                                 </ul>
-                                @if ($roommate->contact)
+
+                                @if ($roommate && $roommate->contact)
                                     <hr>
                                     <h6>Contact Information</h6>
                                     <ul class="list-unstyled">
@@ -67,9 +71,9 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                                     </form>
-                                    @if(!$existingReview)
+                                    @if($roommate && !$existingReview)
                                         <a href="{{ route('reviews.create', $roommate->id) }}" class="btn btn-primary btn-sm">Write Review</a>
-                                    @else
+                                    @elseif($roommate && $existingReview)
                                         <span class="text-success">Review Submitted</span>
                                     @endif
                                 </div>

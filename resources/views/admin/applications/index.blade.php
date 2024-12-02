@@ -38,8 +38,8 @@
                                 <td>{{ $application->id }}</td>
                                 <td>{{ $application->applicant_id }}</td>
                                 <td>{{ $application->roommate_id }}</td>
-                                <td class="text-dark fw-bold">{{ $application->applicant->name }}</td>
-                                <td class="text-dark fw-bold">{{ $application->roommate->name }}</td>
+                                <td class="text-dark fw-bold">{{ $application->applicant ? $application->applicant->name : 'Deleted User' }}</td>
+                                <td class="text-dark fw-bold">{{ $application->roommate ? $application->roommate->name : 'Deleted User' }}</td>
                                 <td>
                                     <span class="badge
                                         {{ $application->status == 'pending' ? 'bg-warning text-dark' :
