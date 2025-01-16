@@ -13,6 +13,22 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-gradient-to-b from-white to-[#4DB1E2] dark:bg-[#4DB1E2] dark:text-white">
+    <!-- Consent Card -->
+    <div id="consent-card" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+            <h3 class="text-lg font-semibold text-gray-800">Consent Notice</h3>
+            <p class="text-sm text-gray-600 mt-2">
+                By using this system, you acknowledge that your personal data, including your personal information, lifestyle, interests, and preferences, will be visible to other users. This is essential for the system to function effectively and match you with others. For details, please review our
+                <a href="#" class="text-blue-600 underline">Privacy Policy</a>.
+            </p>
+            <div class="mt-4 flex justify-end">
+                <button id="agree-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                    Agree and Continue
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Navbar Section -->
     <header class="bg-white dark:bg-white w-full shadow-md">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -165,5 +181,31 @@
             </div>
         </div>
     </footer>
+
+    <!-- JavaScript for Consent Card -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const consentKey = 'consentAgreed';
+    const consentExpiryKey = 'consentExpiry';
+    const consentDuration = 1 * 60 * 1000; // 1 minute in milliseconds
+
+    const now = Date.now();
+    const consentExpiry = localStorage.getItem(consentExpiryKey);
+
+    // Show the consent card if not agreed or expired
+    if (!consentExpiry || now > parseInt(consentExpiry)) {
+        document.getElementById('consent-card').classList.remove('hidden');
+    }
+
+    document.getElementById('agree-btn').addEventListener('click', () => {
+        // Set the consent agreement and expiry in local storage
+        localStorage.setItem(consentKey, true);
+        localStorage.setItem(consentExpiryKey, now + consentDuration);
+
+        // Hide the consent card
+        document.getElementById('consent-card').classList.add('hidden');
+    });
+});
+    </script>
 </body>
 </html>
