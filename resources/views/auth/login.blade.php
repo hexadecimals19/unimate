@@ -29,7 +29,7 @@
             </p>
 
             <p class="text-sm text-gray-600 mt-2">
-                If you encounter any issues or have specific concerns regarding your profile, data, or the functionality of the system, our support team is here to help. You can reach us at <a href="mailto:muhamadaiman1957@gmail.com" class="text-blue-600">muhamadaiman1957@gmail.com</a> or call us at <a href="tel:+60169361759" class="text-blue-600">+1 (60) 16-936-1759</a>. We are available Monday to Friday, 9 AM to 5 PM (UTC).
+                If you encounter any issues or have specific concerns regarding your profile, data, or the functionality of the system, our support team is here to help. You can reach us at <a href="mailto:muhamadaiman1957@gmail.com" class="text-blue-600">muhamadaiman1957@gmail.com</a> or call us at <a href="tel:+60169361759" class="text-blue-600">+60 (1) 6936-1759</a>. We are available Monday to Friday, 9 AM to 5 PM (UTC).
             </p>
             <br>
             <br>
