@@ -14,23 +14,30 @@
 
         @if($applications->isEmpty())
             <div class="text-center">
-                <div class="mt-4 text-center">
-                    <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="img-fluid" style="max-width: 150px;">
+                <div class="card shadow-sm border-0 rounded-3 p-4" style="background-color: #eaf7ff;">
+                    <div class="text-center">
+                        <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="img-fluid mb-3" style="max-width: 150px;">
+                        <p class="text-muted mb-0">No one has applied to be your roommate yet.</p>
+                    </div>
                 </div>
-                <p class="alert alert-info text-center">No one has applied to be your roommate yet.</p>
             </div>
         @else
             <div class="row">
                 @foreach($applications as $application)
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card shadow-sm border-0 rounded-3">
-                            <div class="card-body p-4">
+                            <div class="card-body p-4 text-center">
+
                                 <!-- Applicant Details -->
-                                <h5 class="card-title fw-bold">{{ $application->applicant->name }}</h5>
+                                <h5 class="card-title fw-bold">
+                                    <a href="{{ route('user.show', $application->applicant->id) }}" class="text-decoration-none text-dark">
+                                        {{ $application->applicant->name }}
+                                    </a>
+                                </h5>
                                 <p class="card-text mb-1"><strong>Student ID:</strong> {{ $application->applicant->studentid }}</p>
                                 <p class="card-text mb-1"><strong>Email:</strong> <a href="mailto:{{ $application->applicant->studentemail }}" class="text-decoration-none">{{ $application->applicant->studentemail }}</a></p>
                                 <p class="card-text mb-1"><strong>College:</strong> {{ $application->applicant->studentcollege }}</p>
-                                <p class="card-text"><strong>Gender:</strong> {{ $application->applicant->studentgender }}</p>
+                                <p class="card-text"><strong>Gender:</strong> {{ ucfirst($application->applicant->studentgender) }}</p>
 
                                 <!-- Action Buttons -->
                                 <div class="d-flex justify-content-between align-items-center mt-4">

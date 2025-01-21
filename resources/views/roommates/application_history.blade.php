@@ -37,7 +37,7 @@
                                 <form action="{{ route('applications.destroy', $application->id) }}" method="POST" class="mt-4">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline-danger w-100">
+                                    <button type="submit" class="btn btn-light w-100">
                                         Remove {{ !$application->roommate ? 'Application' : '' }}
                                     </button>
                                 </form>
