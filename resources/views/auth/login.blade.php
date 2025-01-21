@@ -17,10 +17,28 @@
     <div id="consent-card" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
             <h3 class="text-lg font-semibold text-gray-800">Consent Notice</h3>
+
             <p class="text-sm text-gray-600 mt-2">
-                By using this system, you acknowledge that your personal data, including your personal information, lifestyle, interests, and preferences, will be visible to other users. This is essential for the system to function effectively and match you with others. For details, please review our
-                <a href="#" class="text-blue-600 underline">Privacy Policy</a>.
+                By using this system, you acknowledge that your personal data, including your personal information, lifestyle, interests, and preferences, will be visible to other users. This is essential for the system to function effectively and match you with others.
             </p>
+            <p class="text-sm text-gray-600 mt-2">
+                The information you provide is used solely for the purpose of enhancing the matchmaking process and fostering compatibility among users. Your data will be stored securely, and we are committed to ensuring that it is handled in compliance with applicable privacy laws and regulations. This includes protecting your information from unauthorized access and misuse.
+            </p>
+            <p class="text-sm text-gray-600 mt-2">
+                By proceeding, you consent to the collection, use, and sharing of your data as described. You have the right to update or delete your information at any time through your profile settings. If you have concerns or questions about how your data is used, please contact support for assistance.
+            </p>
+
+            <p class="text-sm text-gray-600 mt-2">
+                If you encounter any issues or have specific concerns regarding your profile, data, or the functionality of the system, our support team is here to help. You can reach us at <a href="mailto:muhamadaiman1957@gmail.com" class="text-blue-600">muhamadaiman1957@gmail.com</a> or call us at <a href="tel:+60169361759" class="text-blue-600">+1 (60) 16-936-1759</a>. We are available Monday to Friday, 9 AM to 5 PM (UTC).
+            </p>
+            <br>
+            <br>
+            <p class="text-sm text-gray-600 mt-2 text-end">
+                <strong>Unimate Support Team</strong>  &copy; {{ date('Y') }} Unimate. All rights reserved.
+            </p>
+
+
+
             <div class="mt-4 flex justify-end">
                 <button id="agree-btn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
                     Agree and Continue
