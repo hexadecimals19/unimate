@@ -232,17 +232,18 @@ if (!is_null($user->profile->home) && $user->profile->home == $potentialRoommate
     {
         $application = RoommateApplication::findOrFail($applicationId);
 
-        if (Auth::id() !== $application->applicant_id) {
-            return redirect()->route('roommate.history')->with('error', 'You are not authorized to delete this application.');
-        }
+    // Check if the authenticated user owns the application
+    if (Auth::id() !== $application->applicant_id) {
+        return redirect()->route('roommate.history')->with('error', 'You are not authorized to delete this application.');
+    }
 
-        if ($application->status !== 'rejected') {
-            return redirect()->route('roommate.history')->with('error', 'Only rejected applications can be deleted.');
-        }
-
+    // Allow deletion if the application is rejected or if the roommate is null
+    if ($application->status === 'rejected' || is_null($application->roommate)) {
         $application->delete();
+        return redirect()->route('roommate.history')->with('success', 'Application removed successfully.');
+    }
 
-        return redirect()->route('roommate.history')->with('success', 'Rejected application removed successfully.');
+    return redirect()->route('roommate.history')->with('error', 'Only rejected applications or applications with missing roommates can be deleted.');
     }
 
     public function confirmed()
