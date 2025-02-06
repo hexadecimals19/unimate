@@ -1,6 +1,3 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-
-/** @type {import('tailwindcss').Config} */
 export default {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
@@ -8,6 +5,10 @@ export default {
         './resources/**/*.blade.php',
         './resources/**/*.js',
         './resources/**/*.vue',
+    ],
+    safelist: [
+        'bg-[#4DB1E2]', 'bg-[#211d70]', 'text-white', 'text-gray-800',
+        'dark:bg-[#4DB1E2]', 'dark:text-white', 'shadow-md', 'rounded-lg'
     ],
     theme: {
         extend: {
