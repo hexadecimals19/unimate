@@ -159,9 +159,6 @@ class RoommateController extends Controller
 }
 
 
-
-
-
     public function applyToBeRoommate($roommateId)
     {
         $userId = Auth::id();
