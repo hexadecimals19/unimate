@@ -38,6 +38,13 @@ class ProfileController extends Controller
     // Update the user's profile
     public function update(Request $request)
 {
+        // Custom validation messages
+        $customMessages = [
+            'studentimage.max' => 'Your image must not exceed 5MB.',
+            'studentimage.image' => 'The file must be an image.',
+            'studentimage.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif.',
+        ];
+
     // Validate the request data
     $request->validate([
         'name' => 'required|string|max:255',
@@ -45,7 +52,7 @@ class ProfileController extends Controller
         'studentid' => 'required',
         'studentgender' => 'required',
         'studentcollege' => 'required',
-        'studentimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'studentimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         'bio' => 'nullable|string',
         'nationality' => 'nullable|string',
         'home' => 'nullable|string',
@@ -78,7 +85,8 @@ class ProfileController extends Controller
         'show_facebook_profile' => 'sometimes|boolean',
         'show_twitter_profile' => 'sometimes|boolean',
         'show_instagram_profile' => 'sometimes|boolean',
-    ]);
+    ], $customMessages
+);
 
         // Get the authenticated user
         $user = Auth::user();

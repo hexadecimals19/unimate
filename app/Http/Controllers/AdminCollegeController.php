@@ -22,7 +22,7 @@ class AdminCollegeController extends Controller
     {
         $validated = $request->validate([
             'collegename' => 'required|string|max:255',
-            'collegeimage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'collegeimage' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
             'collegedesc' => 'required|string',
             'collegetype' => 'required|string',
         ]);
@@ -51,7 +51,7 @@ if ($request->hasFile('collegeimage')) {
         $college = College::findOrFail($id);
         $validated = $request->validate([
             'collegename' => 'required|string|max:255',
-            'collegeimage' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'collegeimage' => 'image|mimes:jpeg,png,jpg,gif|max:5120',
             'collegedesc' => 'required|string',
             'collegetype' => 'required|string',
         ]);

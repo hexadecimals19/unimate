@@ -6,15 +6,15 @@
 <div class="min-vh-100 d-flex justify-content-center align-items-center px-4">
     <!-- Card Section -->
     <div class="card w-100 max-w-md bg-white shadow-lg rounded-lg p-4 p-lg-5">
+          <!-- Logo Section -->
+          <div class="mb-4 text-center">
+            <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="img-fluid mx-auto" style="max-width: 120px;">
+        </div>
         <!-- Card Header -->
         <div class="card-header text-center mb-4">
             <h2 class="h4 fw-bold text-dark">{{ __('Student Register') }}</h2>
         </div>
 
-        <!-- Logo Section -->
-        <div class="mb-4 text-center">
-            <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" class="img-fluid mx-auto" style="max-width: 100px;">
-        </div>
 
         <!-- Form Section -->
         <div class="card-body">
@@ -92,6 +92,13 @@
                         {{ __('Register') }}
                     </button>
                 </div>
+
+                                <!-- Consent Message Link -->
+                                <div class="mt-3 text-center">
+                                    <a href="{{ asset('pdf/consent_message.pdf') }}" target="_blank" class="text-muted">
+                                        {{ __('Read the Consent Message') }}
+                                    </a>
+                                </div>
             </form>
         </div>
     </div>

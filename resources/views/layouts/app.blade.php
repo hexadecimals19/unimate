@@ -148,10 +148,10 @@
                 <div class="d-flex flex-column me-5">
                     <div class="fw-bold mb-2">Resources</div>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-muted text-decoration-none">UiTM Library</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Online Learning Portal</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Student Portal</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Official UiTM Website</a></li>
+                        <li><a href="https://library.uitm.edu.my/" class="text-muted text-decoration-none">UiTM Library</a></li>
+                        <li><a href="https://exampaper.uitm.edu.my/ptarep/" class="text-muted text-decoration-none">EQPS 2.0</a></li>
+                        <li><a href="https://istudent.uitm.edu.my/index_isp.htm" class="text-muted text-decoration-none">Student Portal</a></li>
+                        <li><a href="https://uitm.edu.my/index.php/en/" class="text-muted text-decoration-none">Official UiTM Website</a></li>
                     </ul>
                 </div>
 
@@ -159,11 +159,8 @@
                 <div class="d-flex flex-column me-5">
                     <div class="fw-bold mb-2">Help</div>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-muted text-decoration-none">Contact Us</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Get Help</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Order Status</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Delivery</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Payment Options</a></li>
+                        <li><a href="https://hep.uitm.edu.my/main/index.php/hubungi-kami" class="text-muted text-decoration-none">Contact Us (HEP)</a></li>
+                        <li><a href="https://api.whatsapp.com/send?phone=60355442044&text=e-AduanHEPUiTM" class="text-muted text-decoration-none">e Aduan HEP</a></li>
                     </ul>
                 </div>
 
@@ -171,19 +168,19 @@
                 <div class="d-flex flex-column me-5">
                     <div class="fw-bold mb-2">Company</div>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-muted text-decoration-none">About UiTM</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">News</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Careers</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Investors</a></li>
-                        <li><a href="#" class="text-muted text-decoration-none">Sustainability</a></li>
+                        <li><a href="https://www.uitm.edu.my/index.php/ms/kenali-uitm/tentang-uitm" class="text-muted text-decoration-none">About UiTM</a></li>
+                        <li><a href="https://news.uitm.edu.my/" class="text-muted text-decoration-none">UiTM News Hub</a></li>
+                        <li><a href="https://www.uitm.edu.my/index.php/ms/kerjaya-dengan-uitm" class="text-muted text-decoration-none">Careers</a></li>
+                        <li><a href="https://vc.uitm.edu.my/category/investment/" class="text-muted text-decoration-none">Investors</a></li>
+                        <li><a href="https://uitm.edu.my/sustainability/" class="text-muted text-decoration-none">Sustainability</a></li>
                     </ul>
                 </div>
 
                 <!-- Branding and Copyright -->
                 <div class="ms-auto text-end">
                     <img src="{{ asset('images/unimatelogo.png') }}" alt="Unimate Logo" style="max-width: 100px;">
-                    <div class="text-muted mt-3">&copy; 2024 UiTM. All rights reserved.<br>
-                        For more information, visit the <a href="#" class="text-muted text-decoration-none">Official UiTM Website</a>.
+                    <div class="text-muted mt-3">&copy; 2025 Unimate. All rights reserved.<br>
+                        For more information, visit the <a href="https://uitm.edu.my/index.php/en/" class="text-muted text-decoration-none">Official UiTM Website</a>.
                     </div>
                 </div>
             </div>

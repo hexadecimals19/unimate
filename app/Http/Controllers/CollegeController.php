@@ -118,7 +118,7 @@ class CollegeController extends Controller
     {
         $request->validate([
             'collegename' => 'required|string|max:255',
-            'collegeimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'collegeimage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
             'collegedesc' => 'nullable|string',
         ]);
 
