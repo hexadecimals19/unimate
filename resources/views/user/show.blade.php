@@ -43,7 +43,13 @@
                 <p><strong>State:</strong> {{ $student->profile->show_nationality ? ($student->profile->nationality ?? 'No data available') : 'Hidden by user' }}</p>
                 <p><strong>District or Town:</strong> {{ $student->profile->show_home ? ($student->profile->home ?? 'No data available') : 'Hidden by user' }}</p>
                 <p><strong>Age:</strong> {{ $student->profile->show_age ? ($student->profile->age ?? 'No data available') : 'Hidden by user' }}</p>
-                <p><strong>Date of Birth:</strong> {{ $student->profile->show_date_of_birth ? ($student->profile->date_of_birth ?? 'No data available') : 'Hidden by user' }}</p>
+                <p><strong>Date of Birth:</strong>
+                    {{ $student->profile->show_date_of_birth ?
+                        ($student->profile->date_of_birth ? \Carbon\Carbon::parse($student->profile->date_of_birth)->format('d-m-Y') : 'No data available')
+                        : 'Hidden by user'
+                    }}
+                </p>
+
             </div>
         </div>
 

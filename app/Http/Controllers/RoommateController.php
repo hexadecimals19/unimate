@@ -56,7 +56,13 @@ class RoommateController extends Controller
         'district' => false,
         'interests' => false,
         'lifestyles' => false,
-        'preferences' => false
+        'preferences' => false,
+        'matching_interests' => [],
+        'matching_lifestyles' => [],
+        'matching_preferences' => [],
+        'matching_age' => null, // Store the actual matching age
+        'matching_state' => null, // Store the actual matching state
+        'matching_district' => null, // Store the actual matching district
     ];
 
     if (!$user->profile || !$potentialRoommate->profile) {
@@ -70,65 +76,90 @@ class RoommateController extends Controller
             $score += 10;
             $details['age_points'] = 10;
             $details['age'] = true;
+            $details['matching_age'] = [
+                'user_age' => $user->profile->age,
+                'roommate_age' => $potentialRoommate->profile->age,
+            ]; // Store the actual matching age
         } elseif ($ageDifference <= 5) {
             $score += 5;
             $details['age_points'] = 5;
             $details['age'] = true;
+            $details['matching_age'] = [
+                'user_age' => $user->profile->age,
+                'roommate_age' => $potentialRoommate->profile->age,
+            ]; // Store the actual matching age
         }
     }
 
- // State (nationality) matching
- if (!is_null($user->profile->nationality) && $user->profile->nationality == $potentialRoommate->profile->nationality) {
-    $score += 10;
-    $details['nationality_points'] = 10;
-    $details['nationality'] = true;
-}
-
-// District or Town matching
-if (!is_null($user->profile->home) && $user->profile->home == $potentialRoommate->profile->home) {
-    $score += 5;
-    $details['district_points'] = 5;
-    $details['district'] = true;
-}
-
-        // Interests Matching
-        $interestsUser = array_filter([$user->profile->interest1, $user->profile->interest2, $user->profile->interest3]);
-        $interestsRoommate = array_filter([$potentialRoommate->profile->interest1, $potentialRoommate->profile->interest2, $potentialRoommate->profile->interest3]);
-        $commonInterests = array_intersect($interestsUser, $interestsRoommate);
-        $interestsPoints = count($commonInterests) * 5;
-        if ($interestsPoints > 0) {
-            $score += $interestsPoints;
-            $details['interests_points'] = $interestsPoints;
-            $details['common_interests'] = count($commonInterests);
-            $details['interests'] = true;
-        }
-
-        // Lifestyles Matching
-        $lifestylesUser = array_filter([$user->profile->lifestyle1, $user->profile->lifestyle2, $user->profile->lifestyle3]);
-        $lifestylesRoommate = array_filter([$potentialRoommate->profile->lifestyle1, $potentialRoommate->profile->lifestyle2, $potentialRoommate->profile->lifestyle3]);
-        $commonLifestyles = array_intersect($lifestylesUser, $lifestylesRoommate);
-        $lifestylesPoints = count($commonLifestyles) * 5;
-        if ($lifestylesPoints > 0) {
-            $score += $lifestylesPoints;
-            $details['lifestyles_points'] = $lifestylesPoints;
-            $details['common_lifestyles'] = count($commonLifestyles);
-            $details['lifestyles'] = true;
-        }
-
-        // Preferences Matching
-        $preferencesUser = array_filter([$user->profile->pref1, $user->profile->pref2, $user->profile->pref3, $user->profile->pref4, $user->profile->pref5]);
-        $preferencesRoommate = array_filter([$potentialRoommate->profile->pref1, $potentialRoommate->profile->pref2, $potentialRoommate->profile->pref3, $potentialRoommate->profile->pref4, $potentialRoommate->profile->pref5]);
-        $commonPreferences = array_intersect($preferencesUser, $preferencesRoommate);
-        $preferencesPoints = count($commonPreferences) * 3;
-        if ($preferencesPoints > 0) {
-            $score += $preferencesPoints;
-            $details['preferences_points'] = $preferencesPoints;
-            $details['common_preferences'] = count($commonPreferences);
-            $details['preferences'] = true;
-        }
-
-        return [$score, $details];
+    // State (nationality) matching
+    if (!is_null($user->profile->nationality) && $user->profile->nationality == $potentialRoommate->profile->nationality) {
+        $score += 10;
+        $details['nationality_points'] = 10;
+        $details['nationality'] = true;
+        $details['matching_state'] = [
+            'user_state' => $user->profile->nationality,
+            'roommate_state' => $potentialRoommate->profile->nationality,
+        ]; // Store the actual matching state
     }
+
+    // District or Town matching
+    if (!is_null($user->profile->home) && $user->profile->home == $potentialRoommate->profile->home) {
+        $score += 5;
+        $details['district_points'] = 5;
+        $details['district'] = true;
+        $details['matching_district'] = [
+            'user_district' => $user->profile->home,
+            'roommate_district' => $potentialRoommate->profile->home,
+        ]; // Store the actual matching district
+    }
+
+    // Interests Matching
+    $interestsUser = array_filter([$user->profile->interest1, $user->profile->interest2, $user->profile->interest3]);
+    $interestsRoommate = array_filter([$potentialRoommate->profile->interest1, $potentialRoommate->profile->interest2, $potentialRoommate->profile->interest3]);
+    $commonInterests = array_intersect($interestsUser, $interestsRoommate);
+    $interestsPoints = count($commonInterests) * 5;
+
+    if ($interestsPoints > 0) {
+        $score += $interestsPoints;
+        $details['interests_points'] = $interestsPoints;
+        $details['common_interests'] = count($commonInterests);
+        $details['interests'] = true;
+        $details['matching_interests'] = array_values($commonInterests); // Store the matching interests
+    }
+
+    // Lifestyles Matching
+    $lifestylesUser = array_filter([$user->profile->lifestyle1, $user->profile->lifestyle2, $user->profile->lifestyle3]);
+    $lifestylesRoommate = array_filter([$potentialRoommate->profile->lifestyle1, $potentialRoommate->profile->lifestyle2, $potentialRoommate->profile->lifestyle3]);
+    $commonLifestyles = array_intersect($lifestylesUser, $lifestylesRoommate);
+    $lifestylesPoints = count($commonLifestyles) * 5;
+
+    if ($lifestylesPoints > 0) {
+        $score += $lifestylesPoints;
+        $details['lifestyles_points'] = $lifestylesPoints;
+        $details['common_lifestyles'] = count($commonLifestyles);
+        $details['lifestyles'] = true;
+        $details['matching_lifestyles'] = array_values($commonLifestyles); // Store the matching lifestyles
+    }
+
+    // Preferences Matching
+    $preferencesUser = array_filter([$user->profile->pref1, $user->profile->pref2, $user->profile->pref3, $user->profile->pref4, $user->profile->pref5]);
+    $preferencesRoommate = array_filter([$potentialRoommate->profile->pref1, $potentialRoommate->profile->pref2, $potentialRoommate->profile->pref3, $potentialRoommate->profile->pref4, $potentialRoommate->profile->pref5]);
+    $commonPreferences = array_intersect($preferencesUser, $preferencesRoommate);
+    $preferencesPoints = count($commonPreferences) * 3;
+
+    if ($preferencesPoints > 0) {
+        $score += $preferencesPoints;
+        $details['preferences_points'] = $preferencesPoints;
+        $details['common_preferences'] = count($commonPreferences);
+        $details['preferences'] = true;
+        $details['matching_preferences'] = array_values($commonPreferences); // Store the matching preferences
+    }
+
+    return [$score, $details];
+}
+
+
+
 
 
     public function applyToBeRoommate($roommateId)

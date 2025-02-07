@@ -55,11 +55,17 @@
                                     <h6>Contact Information</h6>
                                     <ul class="list-unstyled">
                                         <li><strong>Phone Number:</strong> {{ $roommate->contact->show_phone_number ? ($roommate->contact->phone_number ?? 'N/A') : 'Hidden by user' }}</li>
+
                                         <li><strong>WhatsApp:</strong> {{ $roommate->contact->show_whatsapp ? ($roommate->contact->whatsapp ?? 'N/A') : 'Hidden by user' }}</li>
+
                                         <li><strong>Telegram:</strong> {{ $roommate->contact->show_telegram ? ($roommate->contact->telegram ?? 'N/A') : 'Hidden by user' }}</li>
-                                        <li><strong>Facebook Profile:</strong> <a href="{{ $roommate->contact->facebook_profile }}" target="_blank">{{ $roommate->contact->facebook_profile ?? 'N/A' }}</a></li>
-                                        <li><strong>Twitter Profile:</strong> <a href="{{ $roommate->contact->twitter_profile }}" target="_blank">{{ $roommate->contact->twitter_profile ?? 'N/A' }}</a></li>
-                                        <li><strong>Instagram Profile:</strong> <a href="{{ $roommate->contact->instagram_profile }}" target="_blank">{{ $roommate->contact->instagram_profile ?? 'N/A' }}</a></li>
+
+                                        <li><strong>Facebook Profile:</strong> {{ $roommate->contact->show_facebook_profile ?($roommate->contact->facebook_profile ?? 'N/A') : 'Hidden by user' }}</li>
+
+                                        <li><strong>Twitter Profile:</strong>  {{ $roommate->contact->show_twitter_profile ?
+                                        ($roommate->contact->twitter_profile ?? 'N/A') : 'Hidden by user' }}</li>
+
+                                        <li><strong>Instagram Profile:</strong> {{ $roommate->contact->show_instagram_profile ?($roommate->contact->instagram_profile ?? 'N/A') : 'Hidden by user' }}</li>
                                     </ul>
                                 @endif
                             </div>

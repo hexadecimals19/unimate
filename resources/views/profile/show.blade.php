@@ -26,6 +26,15 @@
         <p class="text-danger small m-0">Keep your profile updated to ensure accurate information for the performance of the system.</p>
     </div>
 
+<!-- Informative Message -->
+<div class="card bg-warning p-2 mb-3">
+    <p class="text-dark small m-0">
+        Please ensure that your college is set correctly for matching with other users. For example, if your college is set to "Melati", you will only be matched with users who have "Melati" as their registered college.
+    </p>
+</div>
+
+
+
                     <!-- Action Buttons -->
                     <div class="d-flex justify-content-center gap-2">
                         <a href="{{ route('profile.edit') }}" class="btn btn-primary btn-sm">Edit Profile</a>
